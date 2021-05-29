@@ -1,0 +1,55 @@
+ext {
+    versions = [
+            "compilesdk":30,
+            "minsdk":21,
+            "targetsdk":30,
+            "buildToolsVersion":"30.0.3",
+            "jvmTarget" : '1.8',
+            "kotlinCompilerVersion": '1.4.32',
+            "appcompat":"1.2.0",
+            "corektx":"1.3.2",
+            "material":"1.3.0",
+            "okhttp":"4.9.1",
+            "retrofit":"2.9.0",
+            "junit":"4.+",
+            "androidxjunit":"1.1.2",
+            "espresso":"3.3.0",
+            "composeversion":"1.0.0-beta07",
+            "lifecycleruntimektx":"2.3.1",
+            "activitycompose":"1.3.0-alpha06"
+    ]
+
+    googlelib = [
+            material:"com.google.android.material:material:${versions.material}"
+    ]
+
+    androidx = [
+            appcompat: "androidx.appcompat:appcompat:${versions.appcompat}",
+            corektx:"androidx.core:core-ktx:${versions.corektx}",
+            lifecycleruntimektx: "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycleruntimektx}",
+            activitycompose: "androidx.activity:activity-compose:${versions.activitycompose}"
+    ]
+
+    okhttp = [
+            okhttp:"com.squareup.okhttp3:okhttp:${versions.okhttp}"
+    ]
+
+    retrofit = [
+            retrofit: "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+            convertgson:"com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    ]
+
+    test = [
+            junit:"junit:junit:${versions.junit}",
+            androidxjunit:"androidx.test.ext:junit:${versions.androidxjunit}",
+            espresso: "androidx.test.espresso:espresso-core:${versions.espresso}",
+            composeuitest:"androidx.compose.ui:ui-test-junit4:${versions.composeversion}"
+    ]
+
+    compose = [
+            ui: "androidx.compose.ui:ui:${versions.composeversion}",
+            material: "androidx.compose.material:material:${versions.composeversion}",
+            uitooling: "androidx.compose.ui:ui-tooling:${versions.composeversion}"
+
+    ]
+}
