@@ -51,6 +51,7 @@ dependencies {
     implementation androidx.lifecycleruntimektx
     implementation androidx.activitycompose
     implementation project(path: ':common')
+    implementation project(':flutter')
 
     androidTestImplementation test.composeuitest
 }
