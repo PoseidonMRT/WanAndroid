@@ -45,11 +45,14 @@ android {
 
 dependencies {
 
+    implementation androidx.appcompat
+    implementation googlelib.material
     implementation compose.ui
     implementation compose.material
     implementation compose.uitooling
     implementation androidx.lifecycleruntimektx
     implementation androidx.activitycompose
+    implementation androidx.constraintlayout
     implementation project(path: ':common')
     implementation project(':flutter')
 

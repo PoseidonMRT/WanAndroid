@@ -1,16 +1,19 @@
 package com.poseidon.wanandroid
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.Modifier
+import com.poseidon.lib.common.BaseActivity
 import com.poseidon.wanandroid.ui.theme.WanAndroidTheme
+import io.flutter.embedding.android.FlutterActivity
 
-class MainActivity : ComponentActivity() {
+
+class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,17 +25,17 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
+    private fun startFlutterActivity(){
+        var intent = FlutterActivity.createDefaultIntent(this@MainActivity)
+        startActivity(intent)
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    WanAndroidTheme {
-        Greeting("Android")
+    @Composable
+    fun Greeting(name: String) {
+        val modifier = Modifier.clickable (enabled=true, onClick = {
+            startFlutterActivity()
+        } )
+        Text(text = "Hello Flutter Activity",modifier = modifier)
     }
 }

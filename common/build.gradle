@@ -34,7 +34,7 @@ android {
 
 dependencies {
 
-    implementation androidx.appcompat
+    compileOnly androidx.appcompat
     implementation okhttp.okhttp
     implementation retrofit.retrofit
     implementation retrofit.convertgson
