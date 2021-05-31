@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -47,6 +49,11 @@ dependencies {
 
     implementation androidx.appcompat
     implementation googlelib.material
+    implementation androidx.activity
+    implementation daggerhilt.hilt
+    kapt daggerhilt.kapt
+    implementation androidx.hilt
+    kapt androidx.hiltkapt
     implementation compose.ui
     implementation compose.material
     implementation compose.uitooling
@@ -55,6 +62,7 @@ dependencies {
     implementation androidx.constraintlayout
     implementation project(path: ':common')
     implementation project(':flutter')
+
 
     androidTestImplementation test.composeuitest
 }
