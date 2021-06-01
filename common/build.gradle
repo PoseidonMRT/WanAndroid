@@ -35,11 +35,11 @@ android {
 dependencies {
 
     compileOnly androidx.appcompat
-    implementation okhttp.okhttp
-    implementation retrofit.retrofit
-    implementation retrofit.convertgson
-    implementation androidx.corektx
-    implementation googlelib.material
+    compileOnly okhttp.okhttp
+    compileOnly retrofit.retrofit
+    compileOnly retrofit.convertgson
+    compileOnly androidx.corektx
+    compileOnly googlelib.material
     testImplementation test.junit
     androidTestImplementation test.androidxjunit
     androidTestImplementation test.espresso

@@ -54,6 +54,10 @@ dependencies {
     kapt daggerhilt.kapt
     implementation androidx.hilt
     kapt androidx.hiltkapt
+    implementation okhttp.okhttp
+    implementation retrofit.retrofit
+    implementation retrofit.convertgson
+    implementation androidx.corektx
     implementation compose.ui
     implementation compose.material
     implementation compose.uitooling
