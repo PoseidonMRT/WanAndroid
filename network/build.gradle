@@ -34,10 +34,7 @@ android {
 
 dependencies {
 
-    compileOnly androidx.appcompat
-    compileOnly androidx.corektx
-    compileOnly googlelib.material
-    testImplementation test.junit
-    androidTestImplementation test.androidxjunit
-    androidTestImplementation test.espresso
+    compileOnly okhttp.okhttp
+    compileOnly retrofit.retrofit
+    compileOnly retrofit.convertgson
 }

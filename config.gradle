@@ -66,4 +66,8 @@ ext {
             hilt: "com.google.dagger:hilt-android:${versions.hilt}",
             kapt: "com.google.dagger:hilt-android-compiler:${versions.hilt}"
     ]
+
+    kotlinGradlePlugin = [
+            plugin:"org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlinversion}"
+    ]
 }
