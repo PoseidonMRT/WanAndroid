@@ -1,0 +1,8 @@
+apply from:rootProject.file('default_library.gradle')
+
+dependencies {
+
+    compileOnly okhttp.okhttp
+    compileOnly retrofit.retrofit
+    compileOnly retrofit.convertgson
+}

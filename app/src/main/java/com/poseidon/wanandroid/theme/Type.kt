@@ -1,4 +1,4 @@
-package com.poseidon.wanandroid.ui.theme
+package com.poseidon.wanandroid.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

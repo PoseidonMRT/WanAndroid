@@ -1,4 +1,4 @@
-package com.poseidon.wanandroid
+package com.poseidon.wanandroid.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.poseidon.wanandroid.ui.theme.WanAndroidTheme
+import com.poseidon.wanandroid.theme.WanAndroidTheme
 import dagger.hilt.android.AndroidEntryPoint
 import io.flutter.embedding.android.FlutterActivity
 

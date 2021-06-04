@@ -12,17 +12,9 @@ class NetworkConfig(var baseUrl: String) {
     var convertFactory: Converter.Factory? = null
     var callAdapterFactory: CallAdapter.Factory? = null
     private var mInterceptors: MutableList<Interceptor>? = null
-    val interceptors: List<Interceptor>?
-        get() = mInterceptors
-
-    fun setInterceptors(mInterceptors: MutableList<Interceptor>?) {
-        this.mInterceptors = mInterceptors
-    }
+    val interceptors: MutableList<Interceptor> = mutableListOf<Interceptor>()
 
     fun addInterceptors(interceptor: Interceptor) {
-        if (mInterceptors == null) {
-            mInterceptors = ArrayList()
-        }
         mInterceptors!!.add(interceptor)
     }
 }

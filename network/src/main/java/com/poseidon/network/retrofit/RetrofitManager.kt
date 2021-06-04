@@ -21,8 +21,14 @@ object RetrofitManager {
         val builder = Retrofit.Builder()
         builder.baseUrl(networkConfig.baseUrl)
             .client(getOkHttpClient(networkConfig))
-        builder.addConverterFactory(networkConfig.convertFactory!!)
-        builder.addCallAdapterFactory(networkConfig.callAdapterFactory!!)
+        if (networkConfig.convertFactory != null) {
+            builder.addConverterFactory(networkConfig.convertFactory)
+        }
+
+        if (networkConfig.callAdapterFactory != null) {
+            builder.addCallAdapterFactory(networkConfig.callAdapterFactory!!)
+        }
+
         return builder.build()
     }
 }
