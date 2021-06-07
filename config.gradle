@@ -59,8 +59,9 @@ ext {
     compose = [
             ui: "androidx.compose.ui:ui:${versions.composeversion}",
             material: "androidx.compose.material:material:${versions.composeversion}",
-            uitooling: "androidx.compose.ui:ui-tooling:${versions.composeversion}"
-
+            uitooling: "androidx.compose.ui:ui-tooling:${versions.composeversion}",
+            composeLiveData:"androidx.compose.runtime:runtime-livedata:${versions.composeversion}",
+            runtime:"androidx.compose.runtime:runtime:${versions.composeversion}"
     ]
 
     daggerhilt = [

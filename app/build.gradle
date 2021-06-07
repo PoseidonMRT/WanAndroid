@@ -61,6 +61,8 @@ dependencies {
     implementation compose.ui
     implementation compose.material
     implementation compose.uitooling
+    implementation compose.composeLiveData
+    implementation compose.runtime
     implementation androidx.lifecycleruntimektx
     implementation androidx.activitycompose
     implementation androidx.constraintlayout
