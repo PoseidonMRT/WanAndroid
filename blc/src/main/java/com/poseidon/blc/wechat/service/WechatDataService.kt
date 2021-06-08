@@ -1,7 +1,9 @@
 package com.poseidon.blc.wechat.service
 
 
+import com.poseidon.blc.wechat.entities.OfficialWechatHistoryBean
 import com.poseidon.blc.wechat.entities.OfficialWechatListBeans
+import com.poseidon.blc.wechat.entities.SearchHistoryOfficialWechatBean
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET
@@ -16,5 +18,12 @@ interface WechatDataService {
     fun getPageOfOfficialWechatHistoryById(
         @Path("id") id: Int,
         @Path("pageIndex") pageIndex: Int
-    ): Call<ResponseBody>
+    ): Call<OfficialWechatHistoryBean>
+
+    @GET("wxarticle/list/{id}}/{pageIndex}/json?k={keyWord}")
+    fun getPageOfSearchOfficialWechatHistoryById(
+        @Path("id") id: Int,
+        @Path("pageIndex") pageIndex: Int,
+        @Path("keyWord") keyWord: String
+    ): Call<SearchHistoryOfficialWechatBean>
 }
