@@ -5,4 +5,5 @@ dependencies {
     compileOnly okhttp.okhttp
     compileOnly retrofit.retrofit
     compileOnly retrofit.convertgson
+    compileOnly picasso.picasso
 }
