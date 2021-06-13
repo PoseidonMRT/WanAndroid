@@ -1,6 +1,7 @@
 package com.poseidon.wanandroid.di
 
 import com.poseidon.blc.banner.usecase.BannerUseCase
+import com.poseidon.blc.home.usecase.HomeUseCase
 import com.poseidon.blc.recommend.usecase.RecommendDataUseCase
 import com.poseidon.wanandroid.main.MainModel
 import dagger.Module
@@ -14,8 +15,13 @@ class ModelModule {
     @Provides
     fun getMainModel(
         bannerUseCase: BannerUseCase,
-        recommendDataUseCase: RecommendDataUseCase
+        recommendDataUseCase: RecommendDataUseCase,
+        homeUseCase: HomeUseCase
     ): MainModel {
-        return MainModel(bannerUseCase = bannerUseCase, recommendDataUseCase = recommendDataUseCase)
+        return MainModel(
+            bannerUseCase = bannerUseCase,
+            recommendDataUseCase = recommendDataUseCase,
+            homeUseCase = homeUseCase
+        )
     }
 }

@@ -2,6 +2,8 @@ package com.poseidon.wanandroid.main
 
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -13,11 +15,13 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.poseidon.lib.common.base.BaseActivity
+import com.poseidon.wanandroid.R
 import com.poseidon.wanandroid.theme.WanAndroidTheme
 import com.zj.banner.BannerPager
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,8 +61,46 @@ class MainActivity : BaseActivity() {
     fun BuildPage(state: State<MainViewState?>) {
         Column(Modifier.verticalScroll(rememberScrollState())) {
             ShowBanners(state = state)
+            BuildCard()
+            Text(
+                text = stringResource(R.string.recommend_article),
+                modifier = Modifier.padding(5.dp),
+                fontWeight = FontWeight.ExtraBold
+            )
             ShowRecommendArticle(state)
         }
+    }
+
+    @Composable
+    fun BuildCard() {
+        Row(
+            modifier = Modifier
+                .height(100.dp)
+                .padding(5.dp)
+                .fillMaxWidth()
+        ) {
+            Box(
+                Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(Color.LightGray)
+                    .padding(end = 5.dp)
+                    .clickable { }, contentAlignment = Alignment.Center
+            ) {
+                Text("项目", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 30.sp)
+            }
+            Box(
+                Modifier
+                    .weight(1f)
+                    .padding(start = 5.dp)
+                    .fillMaxHeight()
+                    .background(Color.Black)
+                    .clickable { }, contentAlignment = Alignment.Center
+            ) {
+                Text("项目", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 30.sp)
+            }
+        }
+
     }
 
     @Composable
@@ -74,7 +116,7 @@ class MainActivity : BaseActivity() {
     @Composable
     fun ShowRecommendArticle(state: State<MainViewState?>) {
         val recommendArticleBean = state.value!!.recommendArticleBean
-        recommendArticleBean?.data?.forEach { item ->
+        recommendArticleBean?.forEach { item ->
             Column(modifier = Modifier.padding(5.dp)) {
                 Text(
                     text = item.title,

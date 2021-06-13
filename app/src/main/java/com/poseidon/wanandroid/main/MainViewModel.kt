@@ -5,14 +5,16 @@ import androidx.hilt.lifecycle.ViewModelInject
 import com.poseidon.blc.banner.entities.BannerBeans
 import com.poseidon.blc.callback.UseCaseRequestCallback
 import com.poseidon.blc.callback.UseCaseRequestFailed
-import com.poseidon.blc.recommend.entities.RecommendArticleBean
+import com.poseidon.blc.common.ArticleBean
 import com.poseidon.lib.common.base.BaseViewModel
 import com.poseidon.lib.common.base.ViewState
+import com.poseidon.lib.common.callback.LoadDataCallback
 import retrofit2.Call
 
 class MainViewModel @ViewModelInject constructor(var mainModel: MainModel) :
     BaseViewModel<MainViewState>() {
     val TAG = "MainViewModel"
+    var currentPageIndex = 0;
 
     fun loadData() {
         mainModel.getBannerList(object : UseCaseRequestCallback<BannerBeans> {
@@ -34,21 +36,17 @@ class MainViewModel @ViewModelInject constructor(var mainModel: MainModel) :
             }
         })
 
-        mainModel.getRecommendArticleList(object : UseCaseRequestCallback<RecommendArticleBean> {
-            override fun onSuccess(t: RecommendArticleBean) {
+        mainModel.getArticleList(object : LoadDataCallback<List<ArticleBean>> {
+            override fun onSuccess(t: List<ArticleBean>) {
                 var state: MainViewState = MainViewState.createMainViewState(viewState.value!!)
                 state.recommendArticleBean = t
                 viewState.postValue(state)
             }
 
-            override fun onFailed(call: Call<RecommendArticleBean>, t: UseCaseRequestFailed) {
-                Log.d(TAG, t.toString())
-            }
+            override fun onFailed(code: Int, msg: String) {
 
-            override fun onError(call: Call<RecommendArticleBean>, t: Throwable) {
-                Log.e(TAG, "getRecommendArticleList error", t)
             }
-        })
+        }, true, currentPageIndex)
     }
 
     override fun getViewState(): MainViewState {
@@ -58,7 +56,7 @@ class MainViewModel @ViewModelInject constructor(var mainModel: MainModel) :
 
 class MainViewState(isLoading: Boolean) : ViewState(isLoading) {
     var banners = arrayListOf<BannerData>()
-    var recommendArticleBean: RecommendArticleBean? = null
+    var recommendArticleBean: List<ArticleBean>? = null
 
     companion object {
         fun createMainViewState(state: MainViewState): MainViewState {
