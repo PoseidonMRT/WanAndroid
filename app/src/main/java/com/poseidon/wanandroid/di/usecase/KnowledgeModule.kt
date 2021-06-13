@@ -1,4 +1,4 @@
-package com.poseidon.wanandroid.di
+package com.poseidon.wanandroid.di.usecase
 
 import com.poseidon.blc.knowledge.service.KnowledgeService
 import com.poseidon.blc.knowledge.usecase.KnowledgeUseCase

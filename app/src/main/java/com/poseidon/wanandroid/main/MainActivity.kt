@@ -1,6 +1,5 @@
 package com.poseidon.wanandroid.main
 
-import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.clickable
@@ -36,12 +35,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initObservers() {
-        viewModel.viewState.observe(this,
-            { t ->
-                if (t != null) {
-
-                }
-            })
     }
 
     override fun initData() {
@@ -57,6 +50,7 @@ class MainActivity : BaseActivity() {
     fun buildPage(state: State<MainViewState?>) {
         Column() {
             showBanners(state = state)
+            showRecommendArticle(state)
         }
     }
 
@@ -67,6 +61,14 @@ class MainActivity : BaseActivity() {
             BannerPager(items = banners) {
 
             }
+        }
+    }
+
+    @Composable
+    fun showRecommendArticle(state: State<MainViewState?>) {
+        var recommendArticleBean = state.value!!.recommendArticleBean
+        if (recommendArticleBean != null) {
+
         }
     }
 

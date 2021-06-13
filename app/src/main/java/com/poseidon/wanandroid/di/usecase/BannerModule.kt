@@ -1,4 +1,4 @@
-package com.poseidon.wanandroid.di
+package com.poseidon.wanandroid.di.usecase
 
 import com.poseidon.blc.banner.service.BannerDataService
 import com.poseidon.blc.banner.usecase.BannerUseCase

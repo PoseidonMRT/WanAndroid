@@ -1,4 +1,4 @@
-package com.poseidon.wanandroid.di
+package com.poseidon.wanandroid.di.usecase
 
 import com.poseidon.blc.project.service.ProjectService
 import com.poseidon.blc.project.usecase.ProjectUseCase

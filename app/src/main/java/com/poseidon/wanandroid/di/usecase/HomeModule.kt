@@ -1,4 +1,4 @@
-package com.poseidon.wanandroid.di
+package com.poseidon.wanandroid.di.usecase
 
 import com.poseidon.blc.home.service.HomeDataService
 import com.poseidon.blc.home.usecase.HomeUseCase

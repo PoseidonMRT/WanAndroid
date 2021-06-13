@@ -1,4 +1,4 @@
-package com.poseidon.wanandroid.di
+package com.poseidon.wanandroid.di.usecase
 
 import com.poseidon.blc.hotwords.service.HotWordsService
 import com.poseidon.blc.hotwords.usecase.HotWordsUseCase

@@ -1,4 +1,4 @@
-package com.poseidon.wanandroid.di
+package com.poseidon.wanandroid.di.usecase
 
 import com.poseidon.blc.author.service.AuthorService
 import com.poseidon.blc.author.usecase.AuthorUseCase
