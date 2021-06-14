@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -64,8 +65,10 @@ class MainActivity : BaseActivity() {
             BuildCard()
             Text(
                 text = stringResource(R.string.recommend_article),
-                modifier = Modifier.padding(5.dp),
-                fontWeight = FontWeight.ExtraBold
+                modifier = Modifier.padding(top = 10.dp, start = 5.dp, end = 5.dp, bottom = 10.dp),
+                fontWeight = FontWeight.SemiBold,
+                color = Color.LightGray,
+                fontSize = 16.sp
             )
             ShowRecommendArticle(state)
         }
@@ -77,27 +80,45 @@ class MainActivity : BaseActivity() {
             modifier = Modifier
                 .height(100.dp)
                 .padding(5.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             Box(
                 Modifier
                     .weight(1f)
                     .fillMaxHeight()
-                    .background(Color.LightGray)
-                    .padding(end = 5.dp)
+                    .background(Color(0xFF9999FF), RoundedCornerShape(25.dp))
                     .clickable { }, contentAlignment = Alignment.Center
             ) {
-                Text("项目", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 30.sp)
+                Text("公众号", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
             }
             Box(
                 Modifier
                     .weight(1f)
-                    .padding(start = 5.dp)
                     .fillMaxHeight()
-                    .background(Color.Black)
+                    .background(Color(0xFF3399CC), RoundedCornerShape(25.dp))
                     .clickable { }, contentAlignment = Alignment.Center
             ) {
-                Text("项目", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 30.sp)
+                Text("体系", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            }
+
+            Box(
+                Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(Color(0xFF3366FF), RoundedCornerShape(25.dp))
+                    .clickable { }, contentAlignment = Alignment.Center
+            ) {
+                Text("问答", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            }
+            Box(
+                Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(Color(0xFF3399FF), RoundedCornerShape(25.dp))
+                    .clickable { }, contentAlignment = Alignment.Center
+            ) {
+                Text("项目", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
             }
         }
 
@@ -120,9 +141,9 @@ class MainActivity : BaseActivity() {
             Column(modifier = Modifier.padding(5.dp)) {
                 Text(
                     text = item.title,
-                    fontSize = 20.sp,
+                    fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.Black
+                    color = Color(0xFFCC000000)
                 )
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
@@ -132,14 +153,14 @@ class MainActivity : BaseActivity() {
                     Text(
                         text = "作者：${item.author}",
                         textAlign = TextAlign.Left,
-                        fontSize = 15.sp,
+                        fontSize = 12.sp,
                         color = Color.Gray,
                         modifier = Modifier.weight(1f)
                     )
                     Text(
                         text = "分类：${item.superChapterName}/${item.chapterName}",
                         textAlign = TextAlign.Right,
-                        fontSize = 15.sp,
+                        fontSize = 12.sp,
                         color = Color.Gray,
                         modifier = Modifier.weight(1f)
                     )
