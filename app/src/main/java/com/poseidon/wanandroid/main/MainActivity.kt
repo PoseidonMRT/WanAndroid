@@ -54,7 +54,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun startFlutterActivity() {
-        val intent = FlutterActivity.createDefaultIntent(this@MainActivity)
+        val intent =
+            FlutterActivity.withNewEngine().initialRoute("/answer").build(this@MainActivity)
         startActivity(intent)
     }
 
@@ -107,7 +108,7 @@ class MainActivity : BaseActivity() {
                     .weight(1f)
                     .fillMaxHeight()
                     .background(Color(0xFF3366FF), RoundedCornerShape(25.dp))
-                    .clickable { }, contentAlignment = Alignment.Center
+                    .clickable { startFlutterActivity() }, contentAlignment = Alignment.Center
             ) {
                 Text("问答", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
             }
@@ -143,7 +144,7 @@ class MainActivity : BaseActivity() {
                     text = item.title,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFFCC000000)
+                    color = Color(0xCC000000)
                 )
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
