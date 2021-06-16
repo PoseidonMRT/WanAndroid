@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_module/answer/AnswerPage.dart';
 import 'package:flutter_module/home/MyHomePage.dart';
 
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
