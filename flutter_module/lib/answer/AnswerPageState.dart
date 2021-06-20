@@ -21,16 +21,21 @@ class AnswerPageState extends ProviderWidgetState<AnswerPage, AnswerViewModel> {
             title: Text(widget.title),
           ),
           body: Center(
-            child: Row(
+            child: Column(
               children: [
-                Text("Count:${viewModel.count}"),
-                Spacer(),
-                GestureDetector(
-                  onTap: () => viewModel.incrementCount(),
-                  child: Text(
-                    "click to increment count",
-                  ),
-                )
+                Row(
+                  children: [
+                    Text("Count:${viewModel.count}"),
+                    Spacer(),
+                    GestureDetector(
+                      onTap: () => viewModel.fetchNextPageAnswerDatas(),
+                      child: Text(
+                        "click to increment count",
+                      ),
+                    )
+                  ],
+                ),
+                Expanded(child: buildList(viewModel))
               ],
             ),
           ),
@@ -39,6 +44,19 @@ class AnswerPageState extends ProviderWidgetState<AnswerPage, AnswerViewModel> {
           SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
           return true;
         });
+  }
+
+  Widget buildList(AnswerViewModel viewModel) {
+    if (viewModel.answerDatas == null) {
+      return Container();
+    }
+    var datas = viewModel.answerDatas!.data!.datas;
+    return ListView.builder(
+      itemCount: datas!.length,
+      itemBuilder: (context, index) {
+        return Text("${datas.elementAt(index).title}");
+      },
+    );
   }
 
   @override

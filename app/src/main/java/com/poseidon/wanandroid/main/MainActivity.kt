@@ -1,5 +1,6 @@
 package com.poseidon.wanandroid.main
 
+import android.content.ComponentName
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
@@ -22,11 +23,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.poseidon.lib.common.base.BaseActivity
+import com.poseidon.wanandroid.FlutterActivity
 import com.poseidon.wanandroid.R
 import com.poseidon.wanandroid.theme.WanAndroidTheme
 import com.zj.banner.BannerPager
 import dagger.hilt.android.AndroidEntryPoint
-import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.android.FlutterActivity.withNewEngine
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -56,6 +58,7 @@ class MainActivity : BaseActivity() {
     private fun startFlutterActivity() {
         val intent =
             FlutterActivity.withNewEngine().initialRoute("/answer").build(this@MainActivity)
+        intent.component = ComponentName(this@MainActivity, FlutterActivity::class.java)
         startActivity(intent)
     }
 
