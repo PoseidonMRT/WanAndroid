@@ -30,9 +30,7 @@ abstract class LifecycleAwareState<T extends StatefulWidget> extends State<T>
   void didChangeDependencies() {
     super.didChangeDependencies();
     ModalRoute<dynamic>? modalRoute = ModalRoute.of(context);
-    if (modalRoute is PageRoute) {
-      getRouteObserver().subscribe(this, modalRoute);
-    }
+    getRouteObserver().subscribe(this, modalRoute as PageRoute);
   }
 
   @override

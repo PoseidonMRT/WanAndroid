@@ -15,7 +15,7 @@ abstract class ProviderWidgetState<T extends StatefulWidget,
   late VM _viewModel;
 
   VM get viewModel => _viewModel;
-  late Widget? _child;
+  Widget? _child;
 
   @override
   void onPageCreate() {
@@ -52,7 +52,7 @@ abstract class ProviderWidgetState<T extends StatefulWidget,
   Widget buildWidget(BuildContext context, VM model, Widget? child);
 
   Widget? createChildWidget() {
-    return null;
+    return Container();
   }
 
   bool isAutomaticKeepAliveClientEnabled() {

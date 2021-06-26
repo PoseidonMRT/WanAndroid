@@ -11,7 +11,6 @@ class AnswerViewModel extends BaseViewModel<AnswerModel> {
 
   void fetchNextPageAnswerDatas() {
     model.fetchAnswerDatasByPage().then((value) {
-      LogUtils.d("fetch then method called");
       answerDatas = value;
       count++;
       notifyListeners();
