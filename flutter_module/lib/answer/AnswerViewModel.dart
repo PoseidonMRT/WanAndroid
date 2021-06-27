@@ -1,4 +1,3 @@
-import 'package:flutter_module/LogUtils.dart';
 import 'package:flutter_module/answer/AnswerModel.dart';
 import 'package:flutter_module/base/BaseViewModel.dart';
 import 'package:flutter_module/base/DioClient.dart';
