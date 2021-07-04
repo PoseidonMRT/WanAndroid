@@ -1,4 +1,4 @@
-import 'package:flutter_module/LogUtils.dart';
+import 'package:flutter_module/native/LogUtils.dart';
 import 'package:flutter_module/base/BaseModel.dart';
 import 'package:flutter_module/base/DioClient.dart';
 import 'package:flutter_module/entities/AnswerDataList.dart';

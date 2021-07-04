@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_module/LogUtils.dart';
+import 'package:flutter_module/native/LogUtils.dart';
 import 'package:flutter_module/answer/AnswerPage.dart';
 import 'package:flutter_module/answer/AnswerViewModel.dart';
 import 'package:flutter_module/base/ProviderWidgetState.dart';
