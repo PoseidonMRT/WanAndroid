@@ -30,3 +30,9 @@ android {
         jvmTarget = versions.jvmTarget
     }
 }
+
+dependencies {
+
+    compileOnly daggerhilt.hilt
+    kapt daggerhilt.kapt
+}

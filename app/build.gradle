@@ -52,8 +52,6 @@ dependencies {
     implementation androidx.activity
     implementation daggerhilt.hilt
     kapt daggerhilt.kapt
-    implementation androidx.hilt
-    kapt androidx.hiltkapt
     implementation okhttp.okhttp
     implementation retrofit.retrofit
     implementation retrofit.convertgson

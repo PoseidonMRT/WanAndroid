@@ -1,7 +1,6 @@
 package com.poseidon.wanandroid.main
 
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
 import com.poseidon.blc.banner.entities.BannerBeans
 import com.poseidon.blc.callback.UseCaseRequestCallback
 import com.poseidon.blc.callback.UseCaseRequestFailed
@@ -9,9 +8,12 @@ import com.poseidon.blc.common.ArticleBean
 import com.poseidon.lib.common.base.BaseViewModel
 import com.poseidon.lib.common.base.ViewState
 import com.poseidon.lib.common.callback.LoadDataCallback
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
+import javax.inject.Inject
 
-class MainViewModel @ViewModelInject constructor(var mainModel: MainModel) :
+@HiltViewModel
+class MainViewModel @Inject constructor(var mainModel: MainModel) :
     BaseViewModel<MainViewState>() {
     val TAG = "MainViewModel"
     var currentPageIndex = 0;

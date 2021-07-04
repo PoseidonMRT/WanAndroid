@@ -1,9 +1,6 @@
 apply from:rootProject.file('default_library.gradle')
 
 dependencies {
-
-    compileOnly androidx.hilt
-    kapt androidx.hiltkapt
     compileOnly okhttp.okhttp
     compileOnly retrofit.retrofit
     compileOnly retrofit.convertgson
