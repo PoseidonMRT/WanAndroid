@@ -15,7 +15,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0-beta05'
+        classpath 'com.android.tools.build:gradle:7.0.0'
         // WARNING 一定要注意这里的版本和config.gradle中kotlin版本一致
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.32"
         classpath "com.google.dagger:hilt-android-gradle-plugin:2.36"
