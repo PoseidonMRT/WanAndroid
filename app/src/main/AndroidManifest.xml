@@ -5,20 +5,27 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".WanAndroidApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".WanAndroidApplication"
         android:theme="@style/Theme.WanAndroid">
-
+        <activity
+            android:name=".wechat.WeChatListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".project.ProjectListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".hierarchy.HierarchyListActivity"
+            android:exported="true" />
         <activity
             android:name=".FlutterActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize" />
-
         <activity
             android:name=".main.MainActivity"
             android:exported="true"

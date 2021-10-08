@@ -28,7 +28,6 @@ import com.poseidon.wanandroid.R
 import com.poseidon.wanandroid.theme.WanAndroidTheme
 import com.zj.banner.BannerPager
 import dagger.hilt.android.AndroidEntryPoint
-import io.flutter.embedding.android.FlutterActivity.withNewEngine
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -55,11 +54,23 @@ class MainActivity : BaseActivity() {
         viewModel.loadData()
     }
 
-    private fun startFlutterActivity() {
+    private fun openAnswerGroup() {
         val intent =
             FlutterActivity.withNewEngine().initialRoute("/answer").build(this@MainActivity)
         intent.component = ComponentName(this@MainActivity, FlutterActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun openHierarchyGroup() {
+
+    }
+
+    private fun openProjectGroup() {
+
+    }
+
+    private fun openWechatGroup() {
+
     }
 
     @Composable
@@ -92,18 +103,28 @@ class MainActivity : BaseActivity() {
                     .weight(1f)
                     .fillMaxHeight()
                     .background(Color(0xFF9999FF), RoundedCornerShape(25.dp))
-                    .clickable { }, contentAlignment = Alignment.Center
+                    .clickable { openWechatGroup() }, contentAlignment = Alignment.Center
             ) {
-                Text("公众号", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                Text(
+                    text = stringResource(id = R.string.wechat_group),
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                )
             }
             Box(
                 Modifier
                     .weight(1f)
                     .fillMaxHeight()
                     .background(Color(0xFF3399CC), RoundedCornerShape(25.dp))
-                    .clickable { }, contentAlignment = Alignment.Center
+                    .clickable { openHierarchyGroup() }, contentAlignment = Alignment.Center
             ) {
-                Text("体系", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                Text(
+                    text = stringResource(id = R.string.hierarchy_group),
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                )
             }
 
             Box(
@@ -111,18 +132,28 @@ class MainActivity : BaseActivity() {
                     .weight(1f)
                     .fillMaxHeight()
                     .background(Color(0xFF3366FF), RoundedCornerShape(25.dp))
-                    .clickable { startFlutterActivity() }, contentAlignment = Alignment.Center
+                    .clickable { openAnswerGroup() }, contentAlignment = Alignment.Center
             ) {
-                Text("问答", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                Text(
+                    text = stringResource(id = R.string.answer_group),
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                )
             }
             Box(
                 Modifier
                     .weight(1f)
                     .fillMaxHeight()
                     .background(Color(0xFF3399FF), RoundedCornerShape(25.dp))
-                    .clickable { }, contentAlignment = Alignment.Center
+                    .clickable { openProjectGroup() }, contentAlignment = Alignment.Center
             ) {
-                Text("项目", color = Color.White, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+                Text(
+                    text = stringResource(id = R.string.project_group),
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                )
             }
         }
 
