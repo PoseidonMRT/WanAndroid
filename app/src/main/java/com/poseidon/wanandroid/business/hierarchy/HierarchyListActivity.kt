@@ -1,4 +1,4 @@
-package com.poseidon.wanandroid.hierarchy
+package com.poseidon.wanandroid.business.hierarchy
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

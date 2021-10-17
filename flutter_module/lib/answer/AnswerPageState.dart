@@ -17,14 +17,12 @@ class AnswerPageState extends ProviderWidgetState<AnswerPage, AnswerViewModel> {
   @override
   void onPageCreate() {
     super.onPageCreate();
-    LogUtils.d("onPageCreate");
     viewModel.fetchNextPageAnswerDatas();
   }
 
   @override
   void onPageResume() {
     super.onPageResume();
-    LogUtils.d("onPageResume");
   }
 
   @override

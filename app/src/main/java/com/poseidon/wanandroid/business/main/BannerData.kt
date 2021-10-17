@@ -1,4 +1,4 @@
-package com.poseidon.wanandroid.main
+package com.poseidon.wanandroid.business.main
 
 import com.zj.banner.model.BaseBannerBean
 

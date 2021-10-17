@@ -13,21 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WanAndroid">
         <activity
-            android:name=".wechat.WeChatListActivity"
+            android:name=".business.wechat.WeChatListActivity"
             android:exported="true" />
         <activity
-            android:name=".project.ProjectListActivity"
+            android:name=".business.project.ProjectListActivity"
             android:exported="true" />
         <activity
-            android:name=".hierarchy.HierarchyListActivity"
+            android:name=".business.hierarchy.HierarchyListActivity"
             android:exported="true" />
         <activity
-            android:name=".FlutterActivity"
+            android:name="io.flutter.embedding.android.FlutterActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".main.MainActivity"
+            android:name=".business.main.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.WanAndroid.NoActionBar">

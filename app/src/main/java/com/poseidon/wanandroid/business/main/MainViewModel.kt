@@ -1,4 +1,4 @@
-package com.poseidon.wanandroid.main
+package com.poseidon.wanandroid.business.main
 
 import android.util.Log
 import com.poseidon.blc.banner.entities.BannerBeans

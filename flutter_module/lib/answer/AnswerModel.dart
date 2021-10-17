@@ -10,7 +10,6 @@ class AnswerModel extends BaseModel {
 
   Future<AnswerDataList> fetchAnswerDatasByPage() async {
     String path = "/wenda/list/${pageIndex}/json";
-    LogUtils.d(path);
     var response = await dioClient.get(path);
     AnswerDataList answerDataList = AnswerDataList.fromJson(response.data);
     return answerDataList;

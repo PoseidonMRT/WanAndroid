@@ -1,6 +1,5 @@
-package com.poseidon.wanandroid.main
+package com.poseidon.wanandroid.business.main
 
-import android.content.ComponentName
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
@@ -23,11 +22,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.poseidon.lib.common.base.BaseActivity
-import com.poseidon.wanandroid.FlutterActivity
 import com.poseidon.wanandroid.R
+import com.poseidon.wanandroid.WanAndroidApplication
 import com.poseidon.wanandroid.theme.WanAndroidTheme
+import com.poseidon.wanandroid.utils.Constants
 import com.zj.banner.BannerPager
 import dagger.hilt.android.AndroidEntryPoint
+import io.flutter.embedding.android.FlutterActivity
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -55,10 +56,11 @@ class MainActivity : BaseActivity() {
     }
 
     private fun openAnswerGroup() {
-        val intent =
-            FlutterActivity.withNewEngine().initialRoute("/answer").build(this@MainActivity)
-        intent.component = ComponentName(this@MainActivity, FlutterActivity::class.java)
+        var intent = FlutterActivity
+            .withCachedEngine(Constants.nameOfAnswerEngineCache)
+            .build(this)
         startActivity(intent)
+        WanAndroidApplication.setFlutterInitRoute(Constants.pathOfAnswer)
     }
 
     private fun openHierarchyGroup() {
