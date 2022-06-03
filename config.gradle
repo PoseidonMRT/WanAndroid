@@ -7,6 +7,8 @@ ext {
             "jvmTarget" : '1.8',
             "kotlinversion" : '1.5.21',
             "kotlinCompilerVersion": '1.5.21',
+            "hiltGradleVersion": '2.36',
+            "buildGradleVersion": '7.0.2',
             "constraintlayout":"2.0.4",
             "appcompat":"1.2.0",
             "corektx":"1.3.2",
