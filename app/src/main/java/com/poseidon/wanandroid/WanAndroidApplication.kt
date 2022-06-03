@@ -27,7 +27,6 @@ class WanAndroidApplication : Application() {
         }
     }
 
-    private val flutterAndroidLogChannel = "WanAndroid"
     override fun onCreate() {
         super.onCreate()
         preCreateFlutterEngine()
@@ -35,7 +34,7 @@ class WanAndroidApplication : Application() {
 
     private fun preCreateFlutterEngine() {
         flutterEngine = FlutterEngine(this)
-        flutterEngine.navigationChannel.setInitialRoute("/answer")
+        flutterEngine.navigationChannel.setInitialRoute(Constants.pathOfAnswer)
         flutterEngine.dartExecutor.executeDartEntrypoint(
             DartExecutor.DartEntrypoint.createDefault()
         )
