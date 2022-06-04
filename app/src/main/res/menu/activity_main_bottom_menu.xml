@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home_menu"
+        android:icon="@drawable/home_drawable"
+        android:title="Home"
+        android:visible="true"
+        app:defaultSelected="true"
+        app:titleVisible="true"></item>
+    <item
+        android:id="@+id/tree_menu"
+        android:icon="@drawable/tree_drawable"
+        android:title="Knowladge Tree"
+        android:visible="true"
+        app:titleVisible="true"></item>
+    <item
+        android:id="@+id/wxarticle_menu"
+        android:icon="@drawable/wechat_drawable"
+        android:title="WX Article"
+        android:visible="true"
+        app:titleVisible="false"></item>
+    <item
+        android:id="@+id/square_menu"
+        android:icon="@drawable/square_drawable"
+        android:title="Square"
+        android:visible="true"
+        app:titleVisible="true"></item>
+</menu>

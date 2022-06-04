@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_navigation_menu_item_icon_width">15dp</dimen>
+    <dimen name="default_navigation_menu_item_icon_height">15dp</dimen>
+    <dimen name="default_navigation_bar_min_height">48dp</dimen>
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BottomNavigationBar">
+        <attr name="navigationMenu" format="reference"/>
+        <attr name="isShowingFloating" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="BottomNavigationMenuItem">
+        <attr name="android:id" />
+        <attr name="android:title" />
+        <attr name="android:icon" />
+        <attr name="titleVisible" format="boolean"/>
+        <attr name="iconWidth" format="dimension"/>
+        <attr name="iconHeight" format="dimension"/>
+        <attr name="defaultSelected" format="boolean"/>
+        <attr name="android:visible" />
+        <attr name="android:enabled" />
+    </declare-styleable>
+</resources>

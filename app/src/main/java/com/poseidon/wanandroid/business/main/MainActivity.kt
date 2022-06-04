@@ -37,6 +37,7 @@ class MainActivity : BaseActivity() {
     private lateinit var state: State<MainViewState?>
 
     override fun initView() {
+//        setContentView(R.layout.activity_main)
         setContent {
             WanAndroidTheme {
                 // A surface container using the 'background' color from the theme
