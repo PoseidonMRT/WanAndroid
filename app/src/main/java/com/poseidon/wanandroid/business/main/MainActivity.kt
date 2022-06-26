@@ -8,14 +8,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -42,9 +41,7 @@ class MainActivity : BaseActivity() {
             WanAndroidTheme {
                 // A surface container using the 'background' color from the theme
                 state = viewModel.viewState.observeAsState(viewModel.getViewState())
-                Surface(color = MaterialTheme.colors.background) {
-                    BuildPage(state)
-                }
+                BuildContent(state = state)
             }
         }
     }
@@ -74,6 +71,39 @@ class MainActivity : BaseActivity() {
 
     private fun openWechatGroup() {
 
+    }
+
+    @Composable
+    fun BuildContent(state: State<MainViewState?>) {
+        Surface(color = MaterialTheme.colors.background) {
+            Scaffold(
+                bottomBar = {
+                    BuildBottomAppBar()
+                }) {
+                BuildPage(state)
+            }
+        }
+    }
+
+    @Composable
+    fun BuildBottomAppBar() {
+        val navItem = listOf(
+            BottomItemScreen.HOME,
+            BottomItemScreen.STAR
+        )
+
+        BottomAppBar() {
+            navItem.forEach {
+                BottomNavigationItem(
+                    label = { Text(text = it.title) },//设置item标签
+                    icon = { Icon(imageVector = it.icon, contentDescription = it.title) },//设置item图标
+                    selectedContentColor = Color.White,//选中时颜色
+                    unselectedContentColor = colorResource(id = android.R.color.darker_gray),
+                    onClick = {},
+                    selected = false
+                )
+            }
+        }
     }
 
     @Composable
