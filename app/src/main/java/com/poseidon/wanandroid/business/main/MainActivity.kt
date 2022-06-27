@@ -2,11 +2,8 @@ package com.poseidon.wanandroid.business.main
 
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -78,39 +75,59 @@ class MainActivity : BaseActivity() {
         Surface(color = MaterialTheme.colors.background) {
             Scaffold(
                 bottomBar = {
-                    BuildBottomAppBar()
+                    BuildBottomAppBar(state)
                 }) {
-                BuildPage(state)
+                if (BottomItemScreen.HOME_ITEM == state.value?.currentSelectedItem) {
+                    buildHomePage(state)
+                }
+                if (BottomItemScreen.SQUARE_ITEM == state.value?.currentSelectedItem) {
+                    buildSquarePage(state)
+                }
+                if (BottomItemScreen.TREE_ITEM == state.value?.currentSelectedItem) {
+                    buildTreePage(state)
+                }
+                if (BottomItemScreen.WECHAT_ITEM == state.value?.currentSelectedItem) {
+                    buildWechatPage(state)
+                }
             }
         }
     }
 
     @Composable
-    fun BuildBottomAppBar() {
+    fun BuildBottomAppBar(state: State<MainViewState?>) {
         val navItem = listOf(
             BottomItemScreen.HOME,
-            BottomItemScreen.STAR
+            BottomItemScreen.SQUARE,
+            BottomItemScreen.TREE,
+            BottomItemScreen.WECHAT
         )
 
-        BottomAppBar() {
+        BottomAppBar(backgroundColor = Color.White) {
             navItem.forEach {
                 BottomNavigationItem(
-                    label = { Text(text = it.title) },//设置item标签
-                    icon = { Icon(imageVector = it.icon, contentDescription = it.title) },//设置item图标
-                    selectedContentColor = Color.White,//选中时颜色
+                    label = { Text(text = stringResource(id = it.title)) },//设置item标签
+                    icon = {
+                        Icon(
+                            imageVector = it.icon,
+                            contentDescription = stringResource(id = it.title)
+                        )
+                    },//设置item图标
+                    selectedContentColor = Color.Blue,//选中时颜色
                     unselectedContentColor = colorResource(id = android.R.color.darker_gray),
-                    onClick = {},
-                    selected = false
+                    onClick = {
+                        viewModel.setCurrentBottomItem(it.route)
+                    },
+                    selected = state.value?.currentSelectedItem == it.route
                 )
             }
         }
     }
 
+
     @Composable
-    fun BuildPage(state: State<MainViewState?>) {
+    fun buildHomePage(state: State<MainViewState?>) {
         Column(Modifier.verticalScroll(rememberScrollState())) {
-            ShowBanners(state = state)
-            BuildCard()
+            showBanners(state = state)
             Text(
                 text = stringResource(R.string.recommend_article),
                 modifier = Modifier.padding(top = 10.dp, start = 5.dp, end = 5.dp, bottom = 10.dp),
@@ -118,82 +135,27 @@ class MainActivity : BaseActivity() {
                 color = Color.LightGray,
                 fontSize = 16.sp
             )
-            ShowRecommendArticle(state)
+            showRecommendArticle(state)
         }
     }
 
     @Composable
-    fun BuildCard() {
-        Row(
-            modifier = Modifier
-                .height(100.dp)
-                .padding(5.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(5.dp)
-        ) {
-            Box(
-                Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
-                    .background(Color(0xFF9999FF), RoundedCornerShape(25.dp))
-                    .clickable { openWechatGroup() }, contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = stringResource(id = R.string.wechat_group),
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
-            }
-            Box(
-                Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
-                    .background(Color(0xFF3399CC), RoundedCornerShape(25.dp))
-                    .clickable { openHierarchyGroup() }, contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = stringResource(id = R.string.hierarchy_group),
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
-            }
-
-            Box(
-                Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
-                    .background(Color(0xFF3366FF), RoundedCornerShape(25.dp))
-                    .clickable { openAnswerGroup() }, contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = stringResource(id = R.string.answer_group),
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
-            }
-            Box(
-                Modifier
-                    .weight(1f)
-                    .fillMaxHeight()
-                    .background(Color(0xFF3399FF), RoundedCornerShape(25.dp))
-                    .clickable { openProjectGroup() }, contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = stringResource(id = R.string.project_group),
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
-            }
-        }
-
+    fun buildSquarePage(state: State<MainViewState?>) {
+        Text(text = "this is Square page")
     }
 
     @Composable
-    fun ShowBanners(state: State<MainViewState?>) {
+    fun buildTreePage(state: State<MainViewState?>) {
+        Text(text = "this is Tree page")
+    }
+
+    @Composable
+    fun buildWechatPage(state: State<MainViewState?>) {
+        Text(text = "this is Wechat page")
+    }
+
+    @Composable
+    fun showBanners(state: State<MainViewState?>) {
         val banners = state.value!!.banners
         if (!banners.isNullOrEmpty()) {
             BannerPager(items = banners) {
@@ -203,7 +165,7 @@ class MainActivity : BaseActivity() {
     }
 
     @Composable
-    fun ShowRecommendArticle(state: State<MainViewState?>) {
+    fun showRecommendArticle(state: State<MainViewState?>) {
         val recommendArticleBean = state.value!!.recommendArticleBean
         recommendArticleBean?.forEach { item ->
             Column(modifier = Modifier.padding(5.dp)) {

@@ -51,6 +51,12 @@ class MainViewModel @Inject constructor(var mainModel: MainModel) :
         }, true, currentPageIndex)
     }
 
+    fun setCurrentBottomItem(currentBottomItem: String) {
+        var state: MainViewState = MainViewState.createMainViewState(viewState.value!!)
+        state.currentSelectedItem = currentBottomItem
+        viewState.postValue(state)
+    }
+
     override fun getViewState(): MainViewState {
         return MainViewState(false)
     }
@@ -59,12 +65,14 @@ class MainViewModel @Inject constructor(var mainModel: MainModel) :
 class MainViewState(isLoading: Boolean) : ViewState(isLoading) {
     var banners = arrayListOf<BannerData>()
     var recommendArticleBean: List<ArticleBean>? = null
+    var currentSelectedItem: String = BottomItemScreen.HOME_ITEM
 
     companion object {
         fun createMainViewState(state: MainViewState): MainViewState {
             var mainState: MainViewState = MainViewState(state.isLoading)
             mainState.banners = state.banners
             mainState.recommendArticleBean = state.recommendArticleBean
+            mainState.currentSelectedItem = state.currentSelectedItem
             return mainState
         }
     }

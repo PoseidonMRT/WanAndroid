@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">WanAndroid</string>
     <string name="recommend_article">主编推荐</string>
-    <string name="wechat_group">公众号</string>
-    <string name="hierarchy_group">体系</string>
-    <string name="answer_group">问答</string>
-    <string name="project_group">项目</string>
+    <string name="main_item_home">首页</string>
+    <string name="main_item_square">广场</string>
+    <string name="main_item_tree">体系</string>
+    <string name="main_item_wechat">公众号</string>
 </resources>
