@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WanAndroid</string>
     <string name="recommend_article">主编推荐</string>
+    <string name="top_hot_article">置顶热文</string>
     <string name="main_item_home">首页</string>
     <string name="main_item_square">广场</string>
     <string name="main_item_tree">体系</string>

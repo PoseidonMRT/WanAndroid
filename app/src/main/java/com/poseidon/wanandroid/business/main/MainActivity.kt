@@ -2,6 +2,7 @@ package com.poseidon.wanandroid.business.main
 
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -11,6 +12,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -38,7 +40,7 @@ class MainActivity : BaseActivity() {
             WanAndroidTheme {
                 // A surface container using the 'background' color from the theme
                 state = viewModel.viewState.observeAsState(viewModel.getViewState())
-                BuildContent(state = state)
+                buildContent(state = state)
             }
         }
     }
@@ -47,7 +49,22 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
-        viewModel.loadData()
+        var currentItem = viewModel.viewState.value?.currentSelectedItem;
+        when (currentItem) {
+            BottomItemScreen.HOME_ITEM -> {
+                viewModel.loadHomeData()
+            }
+            BottomItemScreen.SQUARE_ITEM -> {
+                viewModel.loadSquareData()
+            }
+            BottomItemScreen.TREE_ITEM -> {
+                viewModel.loadTreeData()
+            }
+            BottomItemScreen.WECHAT_ITEM -> {
+                viewModel.loadWechatData()
+            }
+        }
+
     }
 
     private fun openAnswerGroup() {
@@ -71,30 +88,32 @@ class MainActivity : BaseActivity() {
     }
 
     @Composable
-    fun BuildContent(state: State<MainViewState?>) {
+    fun buildContent(state: State<MainViewState?>) {
         Surface(color = MaterialTheme.colors.background) {
             Scaffold(
                 bottomBar = {
-                    BuildBottomAppBar(state)
+                    buildBottomAppBar(state)
                 }) {
-                if (BottomItemScreen.HOME_ITEM == state.value?.currentSelectedItem) {
-                    buildHomePage(state)
-                }
-                if (BottomItemScreen.SQUARE_ITEM == state.value?.currentSelectedItem) {
-                    buildSquarePage(state)
-                }
-                if (BottomItemScreen.TREE_ITEM == state.value?.currentSelectedItem) {
-                    buildTreePage(state)
-                }
-                if (BottomItemScreen.WECHAT_ITEM == state.value?.currentSelectedItem) {
-                    buildWechatPage(state)
+                when (state.value?.currentSelectedItem) {
+                    BottomItemScreen.HOME_ITEM -> {
+                        buildHomePage(state)
+                    }
+                    BottomItemScreen.SQUARE_ITEM -> {
+                        buildSquarePage(state)
+                    }
+                    BottomItemScreen.TREE_ITEM -> {
+                        buildTreePage(state)
+                    }
+                    BottomItemScreen.WECHAT_ITEM -> {
+                        buildWechatPage(state)
+                    }
                 }
             }
         }
     }
 
     @Composable
-    fun BuildBottomAppBar(state: State<MainViewState?>) {
+    fun buildBottomAppBar(state: State<MainViewState?>) {
         val navItem = listOf(
             BottomItemScreen.HOME,
             BottomItemScreen.SQUARE,
@@ -129,6 +148,14 @@ class MainActivity : BaseActivity() {
         Column(Modifier.verticalScroll(rememberScrollState())) {
             showBanners(state = state)
             Text(
+                text = stringResource(R.string.top_hot_article),
+                modifier = Modifier.padding(top = 10.dp, start = 5.dp, end = 5.dp, bottom = 10.dp),
+                fontWeight = FontWeight.SemiBold,
+                color = Color.LightGray,
+                fontSize = 16.sp
+            )
+            showTopHotArticle(state = state)
+            Text(
                 text = stringResource(R.string.recommend_article),
                 modifier = Modifier.padding(top = 10.dp, start = 5.dp, end = 5.dp, bottom = 10.dp),
                 fontWeight = FontWeight.SemiBold,
@@ -160,6 +187,55 @@ class MainActivity : BaseActivity() {
         if (!banners.isNullOrEmpty()) {
             BannerPager(items = banners) {
 
+            }
+        }
+    }
+
+    @Composable
+    fun showTopHotArticle(state: State<MainViewState?>) {
+        val hotArticleList = state.value!!.hotArticleList
+        hotArticleList?.forEach { item ->
+            Column(modifier = Modifier.padding(5.dp)) {
+                Text(
+                    text = item.title,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xCC000000)
+                )
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.top_hot_article),
+                        textAlign = TextAlign.Center,
+                        fontSize = 12.sp,
+                        color = Color.Red,
+                        modifier = Modifier
+                            .border(
+                                width = 2.dp,
+                                color = Color.Red,
+                                shape = RectangleShape
+                            )
+                            .padding(start = 0.dp, top = 1.dp, end = 0.dp, bottom = 1.dp)
+                            .weight(0.4f)
+                    )
+                    Text(
+                        text = "作者：${item.author}",
+                        textAlign = TextAlign.Left,
+                        fontSize = 12.sp,
+                        color = Color.Gray,
+                        modifier = Modifier.weight(1f)
+                    )
+                    Text(
+                        text = "分类：${item.superChapterName}/${item.chapterName}",
+                        textAlign = TextAlign.Right,
+                        fontSize = 12.sp,
+                        color = Color.Gray,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
         }
     }

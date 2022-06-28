@@ -6,6 +6,7 @@ import com.poseidon.blc.callback.UseCaseRequestCallback
 import com.poseidon.blc.callback.UseCaseRequestFailed
 import com.poseidon.blc.common.ArticleBean
 import com.poseidon.blc.home.entities.HomeArticleListBean
+import com.poseidon.blc.home.entities.HotArticleListBean
 import com.poseidon.blc.home.usecase.HomeUseCase
 import com.poseidon.blc.recommend.entities.RecommendArticleBean
 import com.poseidon.blc.recommend.usecase.RecommendDataUseCase
@@ -20,6 +21,10 @@ class MainModel @Inject constructor(
 ) {
     fun getBannerList(useCaseRequestCallback: UseCaseRequestCallback<BannerBeans>) {
         bannerUseCase.getBannerData(useCaseRequestCallback = useCaseRequestCallback)
+    }
+
+    fun getTopHotArticleList(useCaseRequestCallback: UseCaseRequestCallback<HotArticleListBean>) {
+        homeUseCase.getTopHotArticleList(useCaseRequestCallback)
     }
 
     fun getArticleList(

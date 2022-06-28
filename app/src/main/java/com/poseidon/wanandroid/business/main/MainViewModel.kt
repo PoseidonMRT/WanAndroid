@@ -5,6 +5,7 @@ import com.poseidon.blc.banner.entities.BannerBeans
 import com.poseidon.blc.callback.UseCaseRequestCallback
 import com.poseidon.blc.callback.UseCaseRequestFailed
 import com.poseidon.blc.common.ArticleBean
+import com.poseidon.blc.home.entities.HotArticleListBean
 import com.poseidon.lib.common.base.BaseViewModel
 import com.poseidon.lib.common.base.ViewState
 import com.poseidon.lib.common.callback.LoadDataCallback
@@ -15,10 +16,10 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(var mainModel: MainModel) :
     BaseViewModel<MainViewState>() {
-    val TAG = "MainViewModel"
+    val tag = "MainViewModel"
     var currentPageIndex = 0;
 
-    fun loadData() {
+    fun loadHomeData() {
         mainModel.getBannerList(object : UseCaseRequestCallback<BannerBeans> {
             override fun onSuccess(t: BannerBeans) {
                 var state: MainViewState = MainViewState.createMainViewState(viewState.value!!)
@@ -30,12 +31,31 @@ class MainViewModel @Inject constructor(var mainModel: MainModel) :
             }
 
             override fun onFailed(call: Call<BannerBeans>, t: UseCaseRequestFailed) {
-                Log.d(TAG, t.toString())
+                Log.d(tag, t.toString())
             }
 
             override fun onError(call: Call<BannerBeans>, t: Throwable) {
-                Log.e(TAG, "getBannerList error", t)
+                Log.e(tag, "getBannerList error", t)
             }
+        })
+
+        mainModel.getTopHotArticleList(object : UseCaseRequestCallback<HotArticleListBean> {
+            override fun onSuccess(t: HotArticleListBean) {
+                if (t.errorCode == 0 && t.data.isNotEmpty()) {
+                    var state: MainViewState = MainViewState.createMainViewState(viewState.value!!)
+                    state.hotArticleList = t.data
+                    viewState.postValue(state)
+                }
+            }
+
+            override fun onFailed(call: Call<HotArticleListBean>, t: UseCaseRequestFailed) {
+                Log.d(tag, t.toString())
+            }
+
+            override fun onError(call: Call<HotArticleListBean>, t: Throwable) {
+                Log.e(tag, "getTopHotArticleList error", t)
+            }
+
         })
 
         mainModel.getArticleList(object : LoadDataCallback<List<ArticleBean>> {
@@ -46,9 +66,21 @@ class MainViewModel @Inject constructor(var mainModel: MainModel) :
             }
 
             override fun onFailed(code: Int, msg: String) {
-
+                Log.d(tag, "getArticleList failed code:$code,msg:$msg")
             }
         }, true, currentPageIndex)
+    }
+
+    fun loadSquareData() {
+
+    }
+
+    fun loadTreeData() {
+
+    }
+
+    fun loadWechatData() {
+
     }
 
     fun setCurrentBottomItem(currentBottomItem: String) {
@@ -66,6 +98,7 @@ class MainViewState(isLoading: Boolean) : ViewState(isLoading) {
     var banners = arrayListOf<BannerData>()
     var recommendArticleBean: List<ArticleBean>? = null
     var currentSelectedItem: String = BottomItemScreen.HOME_ITEM
+    var hotArticleList: List<HotArticleListBean.HotArticleBean>? = null
 
     companion object {
         fun createMainViewState(state: MainViewState): MainViewState {
@@ -73,6 +106,7 @@ class MainViewState(isLoading: Boolean) : ViewState(isLoading) {
             mainState.banners = state.banners
             mainState.recommendArticleBean = state.recommendArticleBean
             mainState.currentSelectedItem = state.currentSelectedItem
+            mainState.hotArticleList = state.hotArticleList
             return mainState
         }
     }
