@@ -2,10 +2,9 @@ package com.poseidon.wanandroid.business.main
 
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -14,11 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.poseidon.blc.tree.entities.TreeListBean
 import com.poseidon.lib.common.base.BaseActivity
 import com.poseidon.wanandroid.R
 import com.poseidon.wanandroid.WanAndroidApplication
@@ -49,22 +50,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
-        var currentItem = viewModel.viewState.value?.currentSelectedItem;
-        when (currentItem) {
-            BottomItemScreen.HOME_ITEM -> {
-                viewModel.loadHomeData()
-            }
-            BottomItemScreen.SQUARE_ITEM -> {
-                viewModel.loadSquareData()
-            }
-            BottomItemScreen.TREE_ITEM -> {
-                viewModel.loadTreeData()
-            }
-            BottomItemScreen.WECHAT_ITEM -> {
-                viewModel.loadWechatData()
-            }
-        }
-
+        viewModel.loadData()
     }
 
     private fun openAnswerGroup() {
@@ -134,7 +120,7 @@ class MainActivity : BaseActivity() {
                     selectedContentColor = Color.Blue,//选中时颜色
                     unselectedContentColor = colorResource(id = android.R.color.darker_gray),
                     onClick = {
-                        viewModel.setCurrentBottomItem(it.route)
+                        viewModel.updateCurrentBottomItem(it.route)
                     },
                     selected = state.value?.currentSelectedItem == it.route
                 )
@@ -173,104 +159,157 @@ class MainActivity : BaseActivity() {
 
     @Composable
     fun buildTreePage(state: State<MainViewState?>) {
-        Text(text = "this is Tree page")
-    }
-
-    @Composable
-    fun buildWechatPage(state: State<MainViewState?>) {
-        Text(text = "this is Wechat page")
-    }
-
-    @Composable
-    fun showBanners(state: State<MainViewState?>) {
-        val banners = state.value!!.banners
-        if (!banners.isNullOrEmpty()) {
-            BannerPager(items = banners) {
-
-            }
-        }
-    }
-
-    @Composable
-    fun showTopHotArticle(state: State<MainViewState?>) {
-        val hotArticleList = state.value!!.hotArticleList
-        hotArticleList?.forEach { item ->
-            Column(modifier = Modifier.padding(5.dp)) {
-                Text(
-                    text = item.title,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xCC000000)
-                )
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
-                ) {
-                    Text(
-                        text = stringResource(id = R.string.top_hot_article),
-                        textAlign = TextAlign.Center,
-                        fontSize = 12.sp,
-                        color = Color.Red,
-                        modifier = Modifier
-                            .border(
-                                width = 2.dp,
-                                color = Color.Red,
-                                shape = RectangleShape
-                            )
-                            .padding(start = 0.dp, top = 1.dp, end = 0.dp, bottom = 1.dp)
-                            .weight(0.4f)
-                    )
-                    Text(
-                        text = "作者：${item.author}",
-                        textAlign = TextAlign.Left,
-                        fontSize = 12.sp,
-                        color = Color.Gray,
-                        modifier = Modifier.weight(1f)
-                    )
-                    Text(
-                        text = "分类：${item.superChapterName}/${item.chapterName}",
-                        textAlign = TextAlign.Right,
-                        fontSize = 12.sp,
-                        color = Color.Gray,
-                        modifier = Modifier.weight(1f)
-                    )
+        LazyColumn() {
+            state.value?.treeGroupList?.let {
+                items(it?.size) { treeGroup ->
+                    buildTreeGroup(state.value?.treeGroupList!![treeGroup])
                 }
             }
         }
     }
 
     @Composable
-    fun showRecommendArticle(state: State<MainViewState?>) {
-        val recommendArticleBean = state.value!!.recommendArticleBean
-        recommendArticleBean?.forEach { item ->
-            Column(modifier = Modifier.padding(5.dp)) {
+    fun buildTreeGroup(it: TreeListBean.TreeGroup) {
+        var isExpanded by remember {
+            mutableStateOf(false)
+        }
+        Column {
+            Row(
+                modifier = Modifier
+                    .padding(10.dp)
+                    .clickable { isExpanded = !isExpanded },
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
                 Text(
-                    text = item.title,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xCC000000)
+                    text = it.name, color = Color(0xff333333),
+                    fontSize = 14.sp, modifier = Modifier.weight(1.0f, true)
                 )
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(4.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
-                ) {
+                Image(
+                    modifier = Modifier.size(20.dp),
+                    painter = painterResource(
+                        id = if (isExpanded) R.drawable.icon_arrow_up
+                        else R.drawable.icon_arrow_down
+                    ), contentDescription = "更多"
+                )
+            }
+            if (isExpanded) {
+                it.children?.forEach { child ->
                     Text(
-                        text = "作者：${item.author}",
-                        textAlign = TextAlign.Left,
+                        text = child.name,
                         fontSize = 12.sp,
-                        color = Color.Gray,
-                        modifier = Modifier.weight(1f)
-                    )
-                    Text(
-                        text = "分类：${item.superChapterName}/${item.chapterName}",
-                        textAlign = TextAlign.Right,
-                        fontSize = 12.sp,
-                        color = Color.Gray,
-                        modifier = Modifier.weight(1f)
+                        color = Color.Black,
+                        modifier = Modifier.padding(
+                            start = 30.dp,
+                            end = 10.dp,
+                            bottom = 10.dp
+                        )
                     )
                 }
+            }
+            Divider(
+                modifier = Modifier
+                    .background(Color(0xeeeeee))
+                    .height(1.dp)
+            )
+        }
+    }
+
+}
+
+@Composable
+fun buildWechatPage(state: State<MainViewState?>) {
+    Text(text = "this is Wechat page")
+}
+
+@Composable
+fun showBanners(state: State<MainViewState?>) {
+    val banners = state.value!!.banners
+    if (!banners.isNullOrEmpty()) {
+        BannerPager(items = banners) {
+
+        }
+    }
+}
+
+@Composable
+fun showTopHotArticle(state: State<MainViewState?>) {
+    val hotArticleList = state.value!!.hotArticleList
+    hotArticleList?.forEach { item ->
+        Column(modifier = Modifier.padding(5.dp)) {
+            Text(
+                text = item.title,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xCC000000)
+            )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
+            ) {
+                Text(
+                    text = stringResource(id = R.string.top_hot_article),
+                    textAlign = TextAlign.Center,
+                    fontSize = 12.sp,
+                    color = Color.Red,
+                    modifier = Modifier
+                        .border(
+                            width = 2.dp,
+                            color = Color.Red,
+                            shape = RectangleShape
+                        )
+                        .padding(start = 0.dp, top = 1.dp, end = 0.dp, bottom = 1.dp)
+                        .weight(0.4f)
+                )
+                Text(
+                    text = "作者：${item.author}",
+                    textAlign = TextAlign.Left,
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    modifier = Modifier.weight(1f)
+                )
+                Text(
+                    text = "分类：${item.superChapterName}/${item.chapterName}",
+                    textAlign = TextAlign.Right,
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun showRecommendArticle(state: State<MainViewState?>) {
+    val recommendArticleBean = state.value!!.recommendArticleBean
+    recommendArticleBean?.forEach { item ->
+        Column(modifier = Modifier.padding(5.dp)) {
+            Text(
+                text = item.title,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xCC000000)
+            )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
+            ) {
+                Text(
+                    text = "作者：${item.author}",
+                    textAlign = TextAlign.Left,
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    modifier = Modifier.weight(1f)
+                )
+                Text(
+                    text = "分类：${item.superChapterName}/${item.chapterName}",
+                    textAlign = TextAlign.Right,
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    modifier = Modifier.weight(1f)
+                )
             }
         }
     }

@@ -6,6 +6,7 @@ import com.poseidon.blc.callback.UseCaseRequestCallback
 import com.poseidon.blc.callback.UseCaseRequestFailed
 import com.poseidon.blc.common.ArticleBean
 import com.poseidon.blc.home.entities.HotArticleListBean
+import com.poseidon.blc.tree.entities.TreeListBean
 import com.poseidon.lib.common.base.BaseViewModel
 import com.poseidon.lib.common.base.ViewState
 import com.poseidon.lib.common.callback.LoadDataCallback
@@ -17,9 +18,27 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(var mainModel: MainModel) :
     BaseViewModel<MainViewState>() {
     val tag = "MainViewModel"
-    var currentPageIndex = 0;
+    var currentPageIndex = 0
 
-    fun loadHomeData() {
+    fun loadData() {
+        var currentItem = viewState.value?.currentSelectedItem;
+        when (currentItem) {
+            BottomItemScreen.HOME_ITEM -> {
+                loadHomeData()
+            }
+            BottomItemScreen.SQUARE_ITEM -> {
+                loadSquareData()
+            }
+            BottomItemScreen.TREE_ITEM -> {
+                loadTreeData()
+            }
+            BottomItemScreen.WECHAT_ITEM -> {
+                loadWechatData()
+            }
+        }
+    }
+
+    private fun loadHomeData() {
         mainModel.getBannerList(object : UseCaseRequestCallback<BannerBeans> {
             override fun onSuccess(t: BannerBeans) {
                 var state: MainViewState = MainViewState.createMainViewState(viewState.value!!)
@@ -27,6 +46,7 @@ class MainViewModel @Inject constructor(var mainModel: MainModel) :
                     var bannerData = BannerData(it.imagePath)
                     state.banners.add(bannerData)
                 }
+                viewState.value = state
                 viewState.postValue(state)
             }
 
@@ -44,6 +64,7 @@ class MainViewModel @Inject constructor(var mainModel: MainModel) :
                 if (t.errorCode == 0 && t.data.isNotEmpty()) {
                     var state: MainViewState = MainViewState.createMainViewState(viewState.value!!)
                     state.hotArticleList = t.data
+                    viewState.value = state
                     viewState.postValue(state)
                 }
             }
@@ -62,6 +83,7 @@ class MainViewModel @Inject constructor(var mainModel: MainModel) :
             override fun onSuccess(t: List<ArticleBean>) {
                 var state: MainViewState = MainViewState.createMainViewState(viewState.value!!)
                 state.recommendArticleBean = t
+                viewState.value = state
                 viewState.postValue(state)
             }
 
@@ -71,22 +93,40 @@ class MainViewModel @Inject constructor(var mainModel: MainModel) :
         }, true, currentPageIndex)
     }
 
-    fun loadSquareData() {
+    private fun loadSquareData() {
 
     }
 
-    fun loadTreeData() {
+    private fun loadTreeData() {
+        mainModel.getTreeList(object : UseCaseRequestCallback<TreeListBean> {
+            override fun onSuccess(t: TreeListBean) {
+                var state: MainViewState = MainViewState.createMainViewState(viewState.value!!)
+                state.treeGroupList = t.data
+                viewState.value = state
+                viewState.postValue(state)
+            }
+
+            override fun onFailed(call: Call<TreeListBean>, t: UseCaseRequestFailed) {
+                Log.d(tag, t.toString())
+            }
+
+            override fun onError(call: Call<TreeListBean>, t: Throwable) {
+                Log.e(tag, "getBannerList error", t)
+            }
+
+        })
+    }
+
+    private fun loadWechatData() {
 
     }
 
-    fun loadWechatData() {
-
-    }
-
-    fun setCurrentBottomItem(currentBottomItem: String) {
+    fun updateCurrentBottomItem(currentBottomItem: String) {
         var state: MainViewState = MainViewState.createMainViewState(viewState.value!!)
         state.currentSelectedItem = currentBottomItem
+        viewState.value = state
         viewState.postValue(state)
+        loadData()
     }
 
     override fun getViewState(): MainViewState {
@@ -99,14 +139,16 @@ class MainViewState(isLoading: Boolean) : ViewState(isLoading) {
     var recommendArticleBean: List<ArticleBean>? = null
     var currentSelectedItem: String = BottomItemScreen.HOME_ITEM
     var hotArticleList: List<HotArticleListBean.HotArticleBean>? = null
+    var treeGroupList: List<TreeListBean.TreeGroup>? = null
 
     companion object {
         fun createMainViewState(state: MainViewState): MainViewState {
-            var mainState: MainViewState = MainViewState(state.isLoading)
+            var mainState = MainViewState(state.isLoading)
             mainState.banners = state.banners
             mainState.recommendArticleBean = state.recommendArticleBean
             mainState.currentSelectedItem = state.currentSelectedItem
             mainState.hotArticleList = state.hotArticleList
+            mainState.treeGroupList = state.treeGroupList
             return mainState
         }
     }

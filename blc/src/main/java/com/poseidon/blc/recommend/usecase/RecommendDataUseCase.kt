@@ -12,7 +12,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class RecommendDataUseCase @Inject constructor(var recommendDataService: RecommendDataService) {
-    val TAG = "RecommendDataUseCase"
+    val tag = "RecommendDataUseCase"
     fun getRecommendArticleList(requestCallback: UseCaseRequestCallback<RecommendArticleBean>) {
         recommendDataService.getRecommendArticleList()
             .enqueue(object : Callback<RecommendArticleBean> {
@@ -31,7 +31,7 @@ class RecommendDataUseCase @Inject constructor(var recommendDataService: Recomme
                             return
                         }
 
-                        Log.d(TAG, recommendArticleBean.toString())
+                        Log.d(tag, recommendArticleBean.toString())
                         if (recommendArticleBean.errorCode != 0) {
                             requestCallback.onFailed(
                                 call, UseCaseRequestFailed(

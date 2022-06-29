@@ -3,6 +3,7 @@ package com.poseidon.wanandroid.di
 import com.poseidon.blc.banner.usecase.BannerUseCase
 import com.poseidon.blc.home.usecase.HomeUseCase
 import com.poseidon.blc.recommend.usecase.RecommendDataUseCase
+import com.poseidon.blc.tree.usecase.TreeUseCase
 import com.poseidon.wanandroid.business.main.MainModel
 import dagger.Module
 import dagger.Provides
@@ -16,12 +17,14 @@ class ModelModule {
     fun getMainModel(
         bannerUseCase: BannerUseCase,
         recommendDataUseCase: RecommendDataUseCase,
-        homeUseCase: HomeUseCase
+        homeUseCase: HomeUseCase,
+        treeUseCase: TreeUseCase
     ): MainModel {
         return MainModel(
             bannerUseCase = bannerUseCase,
             recommendDataUseCase = recommendDataUseCase,
-            homeUseCase = homeUseCase
+            homeUseCase = homeUseCase,
+            treeUseCase = treeUseCase
         )
     }
 }

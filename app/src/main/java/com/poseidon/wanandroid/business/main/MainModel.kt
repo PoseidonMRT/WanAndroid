@@ -10,6 +10,8 @@ import com.poseidon.blc.home.entities.HotArticleListBean
 import com.poseidon.blc.home.usecase.HomeUseCase
 import com.poseidon.blc.recommend.entities.RecommendArticleBean
 import com.poseidon.blc.recommend.usecase.RecommendDataUseCase
+import com.poseidon.blc.tree.entities.TreeListBean
+import com.poseidon.blc.tree.usecase.TreeUseCase
 import com.poseidon.lib.common.callback.LoadDataCallback
 import retrofit2.Call
 import javax.inject.Inject
@@ -17,7 +19,8 @@ import javax.inject.Inject
 class MainModel @Inject constructor(
     var bannerUseCase: BannerUseCase,
     var recommendDataUseCase: RecommendDataUseCase,
-    var homeUseCase: HomeUseCase
+    var homeUseCase: HomeUseCase,
+    var treeUseCase: TreeUseCase
 ) {
     fun getBannerList(useCaseRequestCallback: UseCaseRequestCallback<BannerBeans>) {
         bannerUseCase.getBannerData(useCaseRequestCallback = useCaseRequestCallback)
@@ -25,6 +28,10 @@ class MainModel @Inject constructor(
 
     fun getTopHotArticleList(useCaseRequestCallback: UseCaseRequestCallback<HotArticleListBean>) {
         homeUseCase.getTopHotArticleList(useCaseRequestCallback)
+    }
+
+    fun getTreeList(useCaseRequestCallback: UseCaseRequestCallback<TreeListBean>) {
+        treeUseCase.getTreeList(useCaseRequestCallback)
     }
 
     fun getArticleList(
