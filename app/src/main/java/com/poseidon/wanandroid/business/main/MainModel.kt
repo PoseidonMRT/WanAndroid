@@ -12,6 +12,8 @@ import com.poseidon.blc.recommend.entities.RecommendArticleBean
 import com.poseidon.blc.recommend.usecase.RecommendDataUseCase
 import com.poseidon.blc.tree.entities.TreeListBean
 import com.poseidon.blc.tree.usecase.TreeUseCase
+import com.poseidon.blc.wechat.entities.OfficialWechatListBeans
+import com.poseidon.blc.wechat.usecase.WechatUseCase
 import com.poseidon.lib.common.callback.LoadDataCallback
 import retrofit2.Call
 import javax.inject.Inject
@@ -20,7 +22,8 @@ class MainModel @Inject constructor(
     var bannerUseCase: BannerUseCase,
     var recommendDataUseCase: RecommendDataUseCase,
     var homeUseCase: HomeUseCase,
-    var treeUseCase: TreeUseCase
+    var treeUseCase: TreeUseCase,
+    var wechatUseCase: WechatUseCase
 ) {
     fun getBannerList(useCaseRequestCallback: UseCaseRequestCallback<BannerBeans>) {
         bannerUseCase.getBannerData(useCaseRequestCallback = useCaseRequestCallback)
@@ -32,6 +35,10 @@ class MainModel @Inject constructor(
 
     fun getTreeList(useCaseRequestCallback: UseCaseRequestCallback<TreeListBean>) {
         treeUseCase.getTreeList(useCaseRequestCallback)
+    }
+
+    fun getWechatList(useCaseRequestCallback: UseCaseRequestCallback<OfficialWechatListBeans>) {
+        wechatUseCase.getWechatOfficialList(useCaseRequestCallback)
     }
 
     fun getArticleList(

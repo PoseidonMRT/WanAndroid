@@ -7,6 +7,7 @@ import com.poseidon.blc.callback.UseCaseRequestFailed
 import com.poseidon.blc.common.ArticleBean
 import com.poseidon.blc.home.entities.HotArticleListBean
 import com.poseidon.blc.tree.entities.TreeListBean
+import com.poseidon.blc.wechat.entities.OfficialWechatListBeans
 import com.poseidon.lib.common.base.BaseViewModel
 import com.poseidon.lib.common.base.ViewState
 import com.poseidon.lib.common.callback.LoadDataCallback
@@ -111,14 +112,30 @@ class MainViewModel @Inject constructor(var mainModel: MainModel) :
             }
 
             override fun onError(call: Call<TreeListBean>, t: Throwable) {
-                Log.e(tag, "getBannerList error", t)
+                Log.e(tag, "getTreeList error", t)
             }
 
         })
     }
 
     private fun loadWechatData() {
+        mainModel.getWechatList(object : UseCaseRequestCallback<OfficialWechatListBeans> {
+            override fun onSuccess(t: OfficialWechatListBeans) {
+                var state: MainViewState = MainViewState.createMainViewState(viewState.value!!)
+                state.wechatInfo = t.data
+                viewState.value = state
+                viewState.postValue(state)
+            }
 
+            override fun onFailed(call: Call<OfficialWechatListBeans>, t: UseCaseRequestFailed) {
+                Log.d(tag, t.toString())
+            }
+
+            override fun onError(call: Call<OfficialWechatListBeans>, t: Throwable) {
+                Log.e(tag, "getWechatList error", t)
+            }
+
+        })
     }
 
     fun updateCurrentBottomItem(currentBottomItem: String) {
@@ -140,6 +157,7 @@ class MainViewState(isLoading: Boolean) : ViewState(isLoading) {
     var currentSelectedItem: String = BottomItemScreen.HOME_ITEM
     var hotArticleList: List<HotArticleListBean.HotArticleBean>? = null
     var treeGroupList: List<TreeListBean.TreeGroup>? = null
+    var wechatInfo: List<OfficialWechatListBeans.WechatInfo>? = null
 
     companion object {
         fun createMainViewState(state: MainViewState): MainViewState {
@@ -149,6 +167,7 @@ class MainViewState(isLoading: Boolean) : ViewState(isLoading) {
             mainState.currentSelectedItem = state.currentSelectedItem
             mainState.hotArticleList = state.hotArticleList
             mainState.treeGroupList = state.treeGroupList
+            mainState.wechatInfo = state.wechatInfo
             return mainState
         }
     }

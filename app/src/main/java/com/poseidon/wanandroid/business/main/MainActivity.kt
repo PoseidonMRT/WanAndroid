@@ -5,7 +5,11 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowRight
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -15,6 +19,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -23,6 +28,7 @@ import com.poseidon.blc.tree.entities.TreeListBean
 import com.poseidon.lib.common.base.BaseActivity
 import com.poseidon.wanandroid.R
 import com.poseidon.wanandroid.WanAndroidApplication
+import com.poseidon.wanandroid.theme.Teal200
 import com.poseidon.wanandroid.theme.WanAndroidTheme
 import com.poseidon.wanandroid.utils.Constants
 import com.zj.banner.BannerPager
@@ -77,6 +83,19 @@ class MainActivity : BaseActivity() {
     fun buildContent(state: State<MainViewState?>) {
         Surface(color = MaterialTheme.colors.background) {
             Scaffold(
+                floatingActionButton = {
+                    FloatingActionButton(
+                        onClick = {
+
+                        },
+                        shape = RoundedCornerShape(50),
+                        backgroundColor = Teal200
+                    ) {
+                        Icon(Icons.Filled.Person, tint = Color.White, contentDescription = "Add")
+                    }
+                },
+                isFloatingActionButtonDocked = true,
+                floatingActionButtonPosition = FabPosition.Center,
                 bottomBar = {
                     buildBottomAppBar(state)
                 }) {
@@ -107,7 +126,7 @@ class MainActivity : BaseActivity() {
             BottomItemScreen.WECHAT
         )
 
-        BottomAppBar(backgroundColor = Color.White) {
+        BottomAppBar(backgroundColor = Color.White, cutoutShape = RoundedCornerShape(50)) {
             navItem.forEach {
                 BottomNavigationItem(
                     label = { Text(text = stringResource(id = it.title)) },//设置item标签
@@ -181,8 +200,12 @@ class MainActivity : BaseActivity() {
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = it.name, color = Color(0xff333333),
-                    fontSize = 14.sp, modifier = Modifier.weight(1.0f, true)
+                    text = it.name,
+                    color = Color(0xff333333),
+                    fontSize = 14.sp,
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.weight(1.0f, true)
                 )
                 Image(
                     modifier = Modifier.size(20.dp),
@@ -197,6 +220,7 @@ class MainActivity : BaseActivity() {
                     Text(
                         text = child.name,
                         fontSize = 12.sp,
+                        fontStyle = FontStyle.Normal,
                         color = Color.Black,
                         modifier = Modifier.padding(
                             start = 30.dp,
@@ -218,7 +242,34 @@ class MainActivity : BaseActivity() {
 
 @Composable
 fun buildWechatPage(state: State<MainViewState?>) {
-    Text(text = "this is Wechat page")
+    val wechatGroup = state.value?.wechatInfo
+    LazyColumn() {
+        wechatGroup?.size?.let {
+            items(it) { index ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.height(48.dp)
+                ) {
+                    Text(
+                        text = wechatGroup[index].name,
+                        fontSize = 14.sp,
+                        fontStyle = FontStyle.Normal,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black,
+                        modifier = Modifier
+                            .padding(start = 20.dp)
+                            .weight(weight = 1.0f)
+                    )
+                    Icon(
+                        Icons.Filled.ArrowRight,
+                        tint = Color.Black,
+                        contentDescription = "更多",
+                        modifier = Modifier.padding(end = 20.dp)
+                    )
+                }
+            }
+        }
+    }
 }
 
 @Composable

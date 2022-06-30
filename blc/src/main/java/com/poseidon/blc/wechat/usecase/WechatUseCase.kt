@@ -1,5 +1,6 @@
 package com.poseidon.blc.wechat.usecase
 
+import android.util.Log
 import com.poseidon.blc.callback.ERROR_CODE_ILLEGAL_DATA
 import com.poseidon.blc.callback.UseCaseRequestCallback
 import com.poseidon.blc.callback.UseCaseRequestFailed
@@ -11,6 +12,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class WechatUseCase @Inject constructor(var wechatDataService: WechatDataService) {
+    val tag = "WechatUseCase"
     fun getWechatOfficialList(useCaseRequestCallback: UseCaseRequestCallback<OfficialWechatListBeans>) {
         wechatDataService.getOfficialWechatList()
             .enqueue(object : Callback<OfficialWechatListBeans> {
@@ -19,16 +21,27 @@ class WechatUseCase @Inject constructor(var wechatDataService: WechatDataService
                     response: Response<OfficialWechatListBeans>
                 ) {
                     if (response.isSuccessful) {
-                        var officialWechatListBeans = response.body()
-                        if (officialWechatListBeans != null) {
-                            useCaseRequestCallback.onSuccess(officialWechatListBeans)
-                        } else {
+                        var wechatListBeans = response.body()
+                        if (wechatListBeans == null) {
                             useCaseRequestCallback.onFailed(
                                 call, UseCaseRequestFailed(
-                                    ERROR_CODE_ILLEGAL_DATA, "officialWechatListBeans is null"
+                                    ERROR_CODE_ILLEGAL_DATA, "getTreeList beans is null"
                                 )
                             )
+                            return
                         }
+
+                        Log.d(tag, wechatListBeans.toString())
+                        if (wechatListBeans.errorCode != 0) {
+                            useCaseRequestCallback.onFailed(
+                                call, UseCaseRequestFailed(
+                                    wechatListBeans.errorCode, wechatListBeans.errorMsg
+                                )
+                            )
+                            return
+                        }
+
+                        useCaseRequestCallback.onSuccess(wechatListBeans)
                     } else {
                         useCaseRequestCallback.onFailed(
                             call, UseCaseRequestFailed(

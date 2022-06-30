@@ -1,12 +1,12 @@
 package com.poseidon.blc.wechat.entities
 
 data class OfficialWechatListBeans(
-    val data: List<DataBean>,
+    val data: List<WechatInfo>,
     val errorCode: Int,
     val errorMsg: String
 ) {
 
-    data class DataBean(
+    data class WechatInfo(
         val children: List<Any?>,
         val courseId: Int,
         val id: Int,
