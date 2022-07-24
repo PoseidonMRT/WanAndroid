@@ -4,7 +4,7 @@ ext {
             "minsdk"             : 21,
             "targetsdk"          : 31,
             "buildToolsVersion"  : "30.0.3",
-            "jvmTarget"          : '1.8',
+            "jvmTarget"          : '11',
             "kotlinversion"      : '1.6.10',
             "buildGradleVersion" : '7.0.2',
             "constraintlayout"   : "2.0.4",

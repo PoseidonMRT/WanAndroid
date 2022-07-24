@@ -9,6 +9,7 @@ is:[WanAndroid](https://www.wanandroid.com/)
 
 * Latest Android Studio Preview Edition:because we have use jetpack compose in this project.
 * Latest Flutter SDK:you need already make flutter environment available in your device.
+* JDK 11
 
 ## Download Project
 
