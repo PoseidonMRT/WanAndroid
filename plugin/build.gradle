@@ -1,0 +1,20 @@
+apply plugin: "java"
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'maven-publish'
+publishing {
+    publications{
+        maven(MavenPublication) {
+            groupId "com.poseidon.plugin"
+            artifactId 'CustomPlugin'
+            version "1.0.0"
+            //如果是war包填写components.web，如果是jar包填写components.java
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            url = "../prebuilts/plugins"
+        }
+    }
+}

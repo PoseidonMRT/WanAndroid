@@ -1,0 +1,60 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "WanAndroid",
+    "module": "plugin",
+    "version": "unspecified",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "CustomPlugin-1.0.0.jar",
+          "url": "CustomPlugin-1.0.0.jar",
+          "size": 1518,
+          "sha512": "6e80eff3a8cad56230f1cb2297aa33941ca0cb23f17c68856338cd338cbb562b2184476b7542091e3969d1cf110f9929c906e842ec20fa14c88417f43e6018a8",
+          "sha256": "1036fc426984298e718a3e70280bfe1b2a3d4b7ab445ea0c903966ef81b2b27f",
+          "sha1": "73de77e590a42b4e02c8b98ed0b3315fd9e838c1",
+          "md5": "a74796e837f6a06256d90fbf41696fa2"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "CustomPlugin-1.0.0.jar",
+          "url": "CustomPlugin-1.0.0.jar",
+          "size": 1518,
+          "sha512": "6e80eff3a8cad56230f1cb2297aa33941ca0cb23f17c68856338cd338cbb562b2184476b7542091e3969d1cf110f9929c906e842ec20fa14c88417f43e6018a8",
+          "sha256": "1036fc426984298e718a3e70280bfe1b2a3d4b7ab445ea0c903966ef81b2b27f",
+          "sha1": "73de77e590a42b4e02c8b98ed0b3315fd9e838c1",
+          "md5": "a74796e837f6a06256d90fbf41696fa2"
+        }
+      ]
+    }
+  ]
+}
