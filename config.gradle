@@ -6,7 +6,7 @@ ext {
             "buildToolsVersion"  : "30.0.3",
             "jvmTarget"          : '11',
             "kotlinversion"      : '1.6.10',
-            "buildGradleVersion" : '7.0.2',
+            "buildGradleVersion" : '7.2.1',
             "constraintlayout"   : "2.0.4",
             "appcompat"          : "1.2.0",
             "corektx"            : "1.5.0",
