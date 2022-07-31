@@ -27,11 +27,11 @@
         {
           "name": "CustomPlugin-1.0.0.jar",
           "url": "CustomPlugin-1.0.0.jar",
-          "size": 1518,
-          "sha512": "6e80eff3a8cad56230f1cb2297aa33941ca0cb23f17c68856338cd338cbb562b2184476b7542091e3969d1cf110f9929c906e842ec20fa14c88417f43e6018a8",
-          "sha256": "1036fc426984298e718a3e70280bfe1b2a3d4b7ab445ea0c903966ef81b2b27f",
-          "sha1": "73de77e590a42b4e02c8b98ed0b3315fd9e838c1",
-          "md5": "a74796e837f6a06256d90fbf41696fa2"
+          "size": 6357,
+          "sha512": "b06dafbdcd0608d717957dda4a72854ee3d5fcc3f28c693fa2d0be42ef0528007a585cb7f526d706e3e0b8acde7b4609cd0411d13ff16acfd234513c802b7bc8",
+          "sha256": "6db13ad4fb37914e6a53c8db518a7b09ac3f21d5617df44f8cfe4a6ab5bb6a62",
+          "sha1": "642986681ac52d8dbbd572739cc8767006acac09",
+          "md5": "bfe37e5cc2b9e88932a55da5dabb9127"
         }
       ]
     },
@@ -44,15 +44,24 @@
         "org.gradle.libraryelements": "jar",
         "org.gradle.usage": "java-runtime"
       },
+      "dependencies": [
+        {
+          "group": "com.android.tools.build",
+          "module": "gradle",
+          "version": {
+            "requires": "7.2.1"
+          }
+        }
+      ],
       "files": [
         {
           "name": "CustomPlugin-1.0.0.jar",
           "url": "CustomPlugin-1.0.0.jar",
-          "size": 1518,
-          "sha512": "6e80eff3a8cad56230f1cb2297aa33941ca0cb23f17c68856338cd338cbb562b2184476b7542091e3969d1cf110f9929c906e842ec20fa14c88417f43e6018a8",
-          "sha256": "1036fc426984298e718a3e70280bfe1b2a3d4b7ab445ea0c903966ef81b2b27f",
-          "sha1": "73de77e590a42b4e02c8b98ed0b3315fd9e838c1",
-          "md5": "a74796e837f6a06256d90fbf41696fa2"
+          "size": 6357,
+          "sha512": "b06dafbdcd0608d717957dda4a72854ee3d5fcc3f28c693fa2d0be42ef0528007a585cb7f526d706e3e0b8acde7b4609cd0411d13ff16acfd234513c802b7bc8",
+          "sha256": "6db13ad4fb37914e6a53c8db518a7b09ac3f21d5617df44f8cfe4a6ab5bb6a62",
+          "sha1": "642986681ac52d8dbbd572739cc8767006acac09",
+          "md5": "bfe37e5cc2b9e88932a55da5dabb9127"
         }
       ]
     }

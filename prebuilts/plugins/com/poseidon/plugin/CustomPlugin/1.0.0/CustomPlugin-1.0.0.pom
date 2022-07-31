@@ -10,4 +10,12 @@
   <groupId>com.poseidon.plugin</groupId>
   <artifactId>CustomPlugin</artifactId>
   <version>1.0.0</version>
+  <dependencies>
+    <dependency>
+      <groupId>com.android.tools.build</groupId>
+      <artifactId>gradle</artifactId>
+      <version>7.2.1</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
 </project>

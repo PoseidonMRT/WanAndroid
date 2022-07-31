@@ -1,7 +1,6 @@
 package com.poseidon.wanandroid
 
 import android.app.Application
-import android.util.Log
 import com.poseidon.wanandroid.utils.Constants
 import dagger.hilt.android.HiltAndroidApp
 import io.flutter.embedding.engine.FlutterEngine

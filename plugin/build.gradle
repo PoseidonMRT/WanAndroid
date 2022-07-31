@@ -1,6 +1,16 @@
 apply plugin: "java"
 apply plugin: 'java-gradle-plugin'
 apply plugin: 'maven-publish'
+
+dependencies {
+    implementation(gradleApi())
+    implementation("com.android.tools.build:gradle:${versions.buildGradleVersion}")
+    compileOnly("commons-io:commons-io:2.6")
+    compileOnly("commons-codec:commons-codec:1.15")
+    compileOnly("org.ow2.asm:asm-commons:9.2")
+    compileOnly("org.ow2.asm:asm-tree:9.2")
+
+}
 publishing {
     publications{
         maven(MavenPublication) {
