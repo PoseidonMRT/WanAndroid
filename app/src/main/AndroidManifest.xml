@@ -14,13 +14,13 @@
         android:theme="@style/Theme.WanAndroid">
         <activity
             android:name=".business.wechat.WeChatListActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".business.project.ProjectListActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".business.hierarchy.HierarchyListActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name="io.flutter.embedding.android.FlutterActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

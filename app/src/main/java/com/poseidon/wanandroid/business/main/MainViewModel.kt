@@ -19,7 +19,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(var mainModel: MainModel) :
     BaseViewModel<MainViewState>() {
     val tag = "MainViewModel"
-    var currentPageIndex = 0
+    var currentHomePageIndex = 0
+    var currentSquarePageIndex = 0
 
     fun loadData() {
         var currentItem = viewState.value?.currentSelectedItem;
@@ -91,11 +92,23 @@ class MainViewModel @Inject constructor(var mainModel: MainModel) :
             override fun onFailed(code: Int, msg: String) {
                 Log.d(tag, "getArticleList failed code:$code,msg:$msg")
             }
-        }, true, currentPageIndex)
+        }, true, currentHomePageIndex)
     }
 
     private fun loadSquareData() {
+        mainModel.getSquareInfo(object : LoadDataCallback<List<ArticleBean>> {
+            override fun onSuccess(t: List<ArticleBean>) {
+                var state: MainViewState = MainViewState.createMainViewState(viewState.value!!)
+                state.squareInfo = t
+                viewState.value = state
+                viewState.postValue(state)
+            }
 
+            override fun onFailed(code: Int, msg: String) {
+                Log.d(tag, "getSquareInfo failed code:$code,msg:$msg")
+            }
+
+        }, currentSquarePageIndex)
     }
 
     private fun loadTreeData() {
@@ -158,6 +171,7 @@ class MainViewState(isLoading: Boolean) : ViewState(isLoading) {
     var hotArticleList: List<HotArticleListBean.HotArticleBean>? = null
     var treeGroupList: List<TreeListBean.TreeGroup>? = null
     var wechatInfo: List<OfficialWechatListBeans.WechatInfo>? = null
+    var squareInfo: List<ArticleBean>? = null
 
     companion object {
         fun createMainViewState(state: MainViewState): MainViewState {
@@ -168,6 +182,7 @@ class MainViewState(isLoading: Boolean) : ViewState(isLoading) {
             mainState.hotArticleList = state.hotArticleList
             mainState.treeGroupList = state.treeGroupList
             mainState.wechatInfo = state.wechatInfo
+            mainState.squareInfo = state.squareInfo
             return mainState
         }
     }

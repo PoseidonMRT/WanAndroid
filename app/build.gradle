@@ -56,6 +56,8 @@ dependencies {
     implementation googlelib.material
     implementation androidx.activity
     implementation daggerhilt.hilt
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'junit:junit:4.12'
     kapt daggerhilt.kapt
     implementation okhttp.okhttp
     implementation retrofit.retrofit
