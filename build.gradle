@@ -10,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:${versions.buildGradleVersion}"
+        classpath "com.android.tools.build:gradle:$versions.buildGradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlinversion}"
         classpath "com.google.dagger:hilt-android-gradle-plugin:${versions.hilt}"
         classpath "com.poseidon.plugin:CustomPlugin:1.0.0"
