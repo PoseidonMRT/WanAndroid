@@ -1,4 +1,4 @@
-
+enableFeaturePreview('VERSION_CATALOGS')
 rootProject.name = "WanAndroid"
 include ':common'
 include ':app'
@@ -13,3 +13,4 @@ include ':blc'
 include ':plugin'
 
 include ':flutter_module'
+

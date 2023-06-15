@@ -52,33 +52,33 @@ android {
 
 dependencies {
 
-    implementation androidx.appcompat
-    implementation googlelib.material
-    implementation androidx.activity
-    implementation daggerhilt.hilt
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testImplementation 'junit:junit:4.12'
-    kapt daggerhilt.kapt
-    implementation okhttp.okhttp
-    implementation retrofit.retrofit
-    implementation retrofit.convertgson
-    implementation androidx.corektx
-    implementation compose.ui
-    implementation compose.material
-    implementation compose.uitooling
-    implementation compose.composeLiveData
-    implementation compose.runtime
-    implementation compose.icon
-    implementation androidx.lifecycleruntimektx
-    implementation androidx.activitycompose
-    implementation androidx.constraintlayout
-    implementation composelib.composePage
-    implementation picasso.picasso
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.activity
+    implementation libs.hilt
+    testImplementation libs.junit.jupiter
+    testImplementation libs.junit
+    kapt libs.kapt
+    implementation libs.okhttp
+    implementation libs.retrofit
+    implementation libs.convertgson
+    implementation libs.corektx
+    implementation libs.ui
+    implementation libs.compose.material
+    implementation libs.uitooling
+    implementation libs.composeLiveData
+    implementation libs.runtime
+    implementation libs.icon
+    implementation libs.lifecycleruntimektx
+    implementation libs.activitycompose
+    implementation libs.constraintlayout
+    implementation libs.composePage
+    implementation libs.picasso
     implementation project(path: ':common')
     implementation project(path: ':network')
     implementation project(path: ':blc')
     implementation project(':flutter')
 
 
-    androidTestImplementation test.composeuitest
+    androidTestImplementation libs.composeuitest
 }

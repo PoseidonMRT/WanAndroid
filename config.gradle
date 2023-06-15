@@ -25,58 +25,7 @@ ext {
             "picasso"            : "2.8"
     ]
 
-    googlelib = [
-            material: "com.google.android.material:material:${versions.material}"
-    ]
-
-    androidx = [
-            appcompat          : "androidx.appcompat:appcompat:${versions.appcompat}",
-            corektx            : "androidx.core:core-ktx:${versions.corektx}",
-            constraintlayout   : "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}",
-            lifecycleruntimektx: "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycleruntimektx}",
-            activitycompose    : "androidx.activity:activity-compose:${versions.activitycompose}",
-            activity           : "androidx.activity:activity:${versions.activity}"
-    ]
-
-    okhttp = [
-            okhttp: "com.squareup.okhttp3:okhttp:${versions.okhttp}"
-    ]
-
-    retrofit = [
-            retrofit   : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
-            convertgson: "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
-    ]
-
-    test = [
-            junit        : "junit:junit:${versions.junit}",
-            androidxjunit: "androidx.test.ext:junit:${versions.androidxjunit}",
-            espresso     : "androidx.test.espresso:espresso-core:${versions.espresso}",
-            composeuitest: "androidx.compose.ui:ui-test-junit4:${versions.composeversion}"
-    ]
-
-    compose = [
-            ui             : "androidx.compose.ui:ui:${versions.composeversion}",
-            material       : "androidx.compose.material:material:${versions.composeversion}",
-            uitooling      : "androidx.compose.ui:ui-tooling:${versions.composeversion}",
-            composeLiveData: "androidx.compose.runtime:runtime-livedata:${versions.composeversion}",
-            runtime        : "androidx.compose.runtime:runtime:${versions.composeversion}",
-            icon           : "androidx.compose.material:material-icons-extended:${versions.composeversion}"
-    ]
-
-    daggerhilt = [
-            hilt: "com.google.dagger:hilt-android:${versions.hilt}",
-            kapt: "com.google.dagger:hilt-android-compiler:${versions.hilt}"
-    ]
-
     kotlinGradlePlugin = [
-            plugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlinversion}"
-    ]
 
-    composelib = [
-            composePage: "com.github.zhujiang521:Banner:${versions.composePage}"
-    ]
-
-    picasso = [
-            picasso: "com.squareup.picasso:picasso:${versions.picasso}"
     ]
 }
