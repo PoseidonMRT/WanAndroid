@@ -10,13 +10,13 @@ if (asmTraceFunctionEnabled.toBoolean()) {
 }
 
 android {
-    compileSdk versions.compilesdk
-    buildToolsVersion versions.buildToolsVersion
+    compileSdk libs.versions.compilesdk.get() as int
+    buildToolsVersion libs.versions.buildToolsVersion.get()
 
     defaultConfig {
         applicationId "com.poseidon.wanandroid"
-        minSdk versions.minsdk
-        targetSdk versions.targetsdk
+        minSdk libs.versions.minsdk.get() as int
+        targetSdk libs.versions.targetsdk.get() as int
         versionCode 1
         versionName "1.0"
 
@@ -38,15 +38,15 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = versions.jvmTarget
+        jvmTarget = libs.versions.jvmTarget.get()
         useIR = true
     }
     buildFeatures {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion versions.composeversion
-        kotlinCompilerVersion versions.kotlinVersion
+        kotlinCompilerExtensionVersion libs.versions.composeversion.get()
+        kotlinCompilerVersion libs.versions.kotlinversion.get()
     }
 }
 

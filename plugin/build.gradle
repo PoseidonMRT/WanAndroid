@@ -4,7 +4,7 @@ apply plugin: 'maven-publish'
 
 dependencies {
     implementation(gradleApi())
-    implementation("com.android.tools.build:gradle:${versions.buildGradleVersion}")
+    implementation("com.android.tools.build:gradle:${libs.versions.buildGradleVersion.get()}")
     compileOnly("commons-io:commons-io:2.6")
     compileOnly("commons-codec:commons-codec:1.15")
     compileOnly("org.ow2.asm:asm-commons:9.2")
