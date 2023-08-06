@@ -1,6 +1,8 @@
 package com.poseidon.wanandroid.business.main
 
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.*
@@ -34,6 +36,7 @@ import com.poseidon.blc.tree.entities.TreeListBean
 import com.poseidon.lib.common.base.BaseActivity
 import com.poseidon.wanandroid.R
 import com.poseidon.wanandroid.WanAndroidApplication
+import com.poseidon.wanandroid.leakcanary.TestService
 import com.poseidon.wanandroid.theme.Teal200
 import com.poseidon.wanandroid.theme.WanAndroidTheme
 import com.poseidon.wanandroid.utils.Constants
@@ -62,7 +65,10 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
+//        startService(Intent(this,TestService::class.java))
         viewModel.loadData()
+//        var mainHandler:Handler = Handler(Looper.getMainLooper())
+//        mainHandler.postDelayed(Runnable { stopService(Intent(MainActivity@this,TestService::class.java)) },300)
     }
 
     private fun openAnswerGroup() {

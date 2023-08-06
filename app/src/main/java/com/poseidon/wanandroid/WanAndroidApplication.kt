@@ -1,6 +1,7 @@
 package com.poseidon.wanandroid
 
 import android.app.Application
+import com.poseidon.wanandroid.leakcanary.ServiceWatcher
 import com.poseidon.wanandroid.utils.Constants
 import dagger.hilt.android.HiltAndroidApp
 import io.flutter.embedding.engine.FlutterEngine
@@ -29,6 +30,7 @@ class WanAndroidApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         preCreateFlutterEngine()
+        initLeakCanary()
     }
 
     private fun preCreateFlutterEngine() {
@@ -39,5 +41,10 @@ class WanAndroidApplication : Application() {
         )
         GeneratedPluginRegistrant.registerWith(flutterEngine)
         FlutterEngineCache.getInstance().put(Constants.nameOfAnswerEngineCache, flutterEngine)
+    }
+
+    private fun initLeakCanary() {
+        // test code for ServiceWatcher
+        ServiceWatcher.getInstance().init()
     }
 }
