@@ -1,7 +1,9 @@
 package com.poseidon.wanandroid
 
 import android.app.Application
+import com.poseidon.wanandroid.leakcanary.FragmentWatcher
 import com.poseidon.wanandroid.leakcanary.ServiceWatcher
+import com.poseidon.wanandroid.leakcanary.ViewModelWatcher
 import com.poseidon.wanandroid.utils.Constants
 import dagger.hilt.android.HiltAndroidApp
 import io.flutter.embedding.engine.FlutterEngine
@@ -46,5 +48,7 @@ class WanAndroidApplication : Application() {
     private fun initLeakCanary() {
         // test code for ServiceWatcher
         ServiceWatcher.getInstance().init()
+        FragmentWatcher.getInstance().init(this)
+        ViewModelWatcher.getInstance().init(this)
     }
 }

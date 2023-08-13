@@ -1,7 +1,6 @@
 package com.poseidon.wanandroid.leakcanary;
 
 import android.app.Service;
-import android.os.Binder;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -19,8 +18,8 @@ public class ServiceWatcher {
     private static final int STOP_SERVICE = 116;
     private Map<IBinder, Service> mActivityThreadServices;
 
-    private ServiceWatcher() {
 
+    private ServiceWatcher() {
     }
 
     private static volatile ServiceWatcher mInstance;
@@ -70,11 +69,13 @@ public class ServiceWatcher {
                         IBinder token = (IBinder) msg.obj;
                         Service service = findServiceFromActivityThreadServices(token);
                         Log.d(TAG, "stop service is:" + service.toString());
+                        ObjectWatcher.getInstance().watch(service);
                     }
 
                     return false;
                 }
             });
+
         } catch (ClassNotFoundException | NoSuchFieldException | InvocationTargetException |
                  NoSuchMethodException | IllegalAccessException e) {
             e.printStackTrace();
