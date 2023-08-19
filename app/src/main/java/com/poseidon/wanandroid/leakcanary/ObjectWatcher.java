@@ -1,9 +1,11 @@
 package com.poseidon.wanandroid.leakcanary;
 
+import android.os.Debug;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import java.io.IOException;
 import java.lang.ref.ReferenceQueue;
 import java.util.UUID;
 import java.util.WeakHashMap;
@@ -35,6 +37,7 @@ public class ObjectWatcher {
     }
 
     public void watch(Object object) {
+        removeWeaklyReachableObjects();
         String key = UUID.randomUUID().toString();
         Log.d(TAG, "watch object:" + object + ",key:" + key);
         KeyedWeakReference weakReference = new KeyedWeakReference(key, object, mReferenceQueue);
@@ -44,18 +47,32 @@ public class ObjectWatcher {
         mainHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-
-                KeyedWeakReference keyedWeakReference = null;
-                do {
-                    keyedWeakReference = (KeyedWeakReference) mReferenceQueue.poll();
-                    Log.d(TAG, "keyedWeakReference:" + keyedWeakReference);
-                    if (keyedWeakReference != null) {
-                        mReferences.remove(keyedWeakReference.getKey());
-                        Log.d(TAG, "object has been destroyed:" + keyedWeakReference.toString());
+                removeWeaklyReachableObjects();
+                KeyedWeakReference keyedWeakReference = mReferences.get(key);
+                if (keyedWeakReference != null) {
+                    // key对应的object可能发生内存泄漏，dump内存堆栈
+                    Log.d(TAG, "keyedReference:" + keyedWeakReference.toString());
+                    try {
+                        Debug.dumpHprofData("/sdcard/Download/tmp.hprof");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
-                } while (keyedWeakReference != null);
+                }
+
             }
         }, 5000);
+    }
+
+    private void removeWeaklyReachableObjects() {
+        KeyedWeakReference keyedWeakReference = null;
+        do {
+            keyedWeakReference = (KeyedWeakReference) mReferenceQueue.poll();
+            Log.d(TAG, "keyedWeakReference:" + keyedWeakReference);
+            if (keyedWeakReference != null) {
+                mReferences.remove(keyedWeakReference.getKey());
+                Log.d(TAG, "object has been destroyed:" + keyedWeakReference.toString());
+            }
+        } while (keyedWeakReference != null);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.poseidon.wanandroid
 
 import android.app.Application
+import com.poseidon.wanandroid.leakcanary.ActivityWatcher
 import com.poseidon.wanandroid.leakcanary.FragmentWatcher
 import com.poseidon.wanandroid.leakcanary.ServiceWatcher
 import com.poseidon.wanandroid.leakcanary.ViewModelWatcher
@@ -50,5 +51,6 @@ class WanAndroidApplication : Application() {
         ServiceWatcher.getInstance().init()
         FragmentWatcher.getInstance().init(this)
         ViewModelWatcher.getInstance().init(this)
+        ActivityWatcher.getInstance().init(this)
     }
 }

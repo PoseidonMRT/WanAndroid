@@ -88,6 +88,13 @@ class MainActivity : BaseActivity() {
 //        mainHandler.postDelayed(Runnable {
 //            finish()
 //        }, 2000)
+//        Thread {
+//            Thread.sleep(600000)
+//            mainHandler.postDelayed({
+//                Toast.makeText(MainActivity@ this, "Hello", Toast.LENGTH_LONG).show()
+//            }, 6000000)
+//        }.start()
+
     }
 
     private fun openAnswerGroup() {
